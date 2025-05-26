@@ -4,9 +4,9 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 ## Course materials
 
-* Background: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html), [R files](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.R)
-
 * Introduction: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Intro.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Intro.R)
+
+* Background: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.R)
 
 * Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Regression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.R)
 
