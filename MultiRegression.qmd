@@ -1,0 +1,906 @@
+---
+title: "Multivariate regression"
+format: 
+  revealjs: 
+    embed-resources: true
+execute:
+  echo: true
+---
+
+```{r setup, include=FALSE}
+knitr::knit_hooks$set(purl = knitr::hook_purl)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Motivation
+
+Previously, we assumed that the model for $y$ is
+
+$$y_i = \alpha + \beta x_i + \varepsilon_i$$
+
+where 
+
+- $\beta$ represents the causal effect of $x$ on $y$, and 
+- $\varepsilon$ is uncorrelated with $x$
+
+---
+
+We estimated this line as
+
+$$\widehat{y}_i = a + b x_i$$
+
+when discussing the interpretation of our estimate $b$ of $\beta$, we asked
+
+> Can we always interpret $b$ as an estimate of the causal effect of $x$ on $y$?
+
+---
+
+The answer was
+
+> **No.** $b$ only represents a good estimate of the causal effect $\beta$ if the assumption that $x$ and $\varepsilon$ are uncorrelated holds
+
+The reason for this is that if $x$ is correlated with $\varepsilon$, then when $x$ changes, $\varepsilon$ will change as well
+
+In this case, $b$ might tell us more about the effect of $\varepsilon$ on $y$ than the effect of $x$ itself on $y$
+
+---
+
+## Multivariate regression and omitted variable bias
+
+Let's assume that the correct model actually involves *two* variables:
+
+$$y_i = \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i$$
+
+Note that if we *omit* $x_2$ from the model, the equation for $y$ can also be written
+
+$$y_i = \alpha + \beta_1 x_{1i} + \underbrace{u_i}_{=\beta_2 x_{2i} + \varepsilon_i}$$
+---
+
+Here, $u$ is the error term in the model that omits $x_2$, and $\beta_2 x_2$ is part of $u$
+
+**Question:** If the correct model is
+
+$$y_i = \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i$$
+
+but we *omit* $x_2$ from the model and estimate the line
+
+$$\widehat{y}_i = a + b x_{1i},$$
+
+is $b$ still a good estimate of $\beta_1$?
+
+---
+
+The answer comes from the **Omitted Variable Bias (OVB) formula**:
+
+$$E(b) = \beta_1 + \beta_2 b_{x_2 x_1}$$
+
+where $b_{x_2 x_1}$ is the slope coefficient from a regression of $x_2$ on $x_1$
+
+Interpetation: If we omit $x_2$ from the model, the estimated coefficient on $x_1$ tells us
+
+$$\text{Effect of $x_1$} + \text{Effect of $x_2$} \cdot \text{Relationship between $x_2$ and $x_1$}$$
+
+---
+
+E.g.: Consider our wage regression, but now suppose that the *true* model is
+
+$$ wage_i = \alpha + \beta_1 school_i + \beta_2 ability_i + \varepsilon_i$$
+If we omit ability from the regression, the coefficient on schooling will tell us
+
+$$
+\begin{multline}
+E(b) = \underbrace{\text{Effect of schooling}}_{\beta_1} \\
++ \underbrace{\text{Effect of ability}}_{\beta_2} * \underbrace{\text{Relationship between ability and schooling}}_{b_{ability,school}}
+\end{multline}
+$$
+
+---
+
+Intuitively, a regression of wages on schooling tells us how wages differ between people with different levels of schooling
+
+But if schooling is correlated with ability, people with different amounts of schooling also have different levels of ability
+
+So our regression is telling us a combination of how schooling itself affects wages and how ability affects wages
+
+---
+
+Let's quickly prove the omitted variable bias formula
+
+$$
+\begin{aligned}
+E(b) &= E\left(\frac{\sum_i x_{1i} y_i}{\sum_i x_{1i}^2}\right) 
+= \frac{1}{\sum_i x_{1i}^2} \sum_i x_{1i} E(y_i) \\
+&= \frac{1}{\sum_i x_{1i}^2} \sum_i x_{1i} E(\beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i) \\
+&= \beta_1 \frac{\sum_i x_{1i}^2}{\sum_i x_{1i}^2} + \beta_2 \underbrace{\frac{\sum_i x_{1i} x_{2i}}{\sum_i x_{1i}^2}}_{=b_{x_2 x_1}} + \underbrace{\frac{\sum_i x_{1i} E(\varepsilon_i)}{\sum_i x_{1i}^2}}_{=0} \\
+&= \beta_1 + \beta_2 b_{x_2 x_1}
+\end{aligned}
+$$
+
+---
+
+## Multivariate regression
+
+What can we do if we're worried that $\varepsilon$ might be correlated with $x_1$?
+
+The problem is that a regression of $y$ on $x_1$ only tells us the *relationship* between $x_1$ and $y$: how $y$ changes when $x_1$ changes 
+
+I.e., the regression compares $y$ between people with different values of $x_1$
+
+But when $x_1$ changes, $x_2$ might be changing as well 
+
+So our regression tells us a combination of how $x_1$ affects $y$ and how $x_2$ affects $y$
+
+---
+
+What we need to do is look at how $y$ changes when $x_1$ changes, *holding $x_2$* constant (i.e, compare $y$ between people with different values of $x$ but the same values)
+
+This is what a **multivariate** regression does^[Aka **multiple regression**]
+
+In a multivariate regression,
+
+$$\widehat{y}_i = a + b_1 x_{1i} + b_2 x_{2i}$$ 
+
+We can actually include as many variables as we want:
+
+$$\widehat{y}_i = a + b_1 x_{1i} + b_2 x_{2i} + \dots + b_k x_{ki}$$
+
+---
+
+## Estimation
+
+How do we estimate a multivariate regression?
+
+We still minimize the sum of squared residuals
+
+That is, $a$ and $b_1, b_2, \dots, b_k$ are chosen to minimize
+
+$$\sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - a - b_1 x_{1i} - b_2 x_{2i} - \dots - b_k x_{ki})^2$$
+
+---
+
+This is really the *only* difference
+
+We still find the regression coefficients with calculus (now we take the partial derivatives with respect to $a$ and $b_1,b_2,\dots,b_k$ and set them equal to zero)
+
+Although the algebra gets more complicated (and we won't go through it), computers have no problem handling the additional work
+
+--- 
+
+## Interpreting multivariate regressions
+
+Once we've estimated our multivariate regression
+
+$$\widehat{y}_i = a + b_1 x_{1i} + b_2 x_{2i} + \dots + b_k x_{ki}$$
+
+We can interpret the $b_j$ as how predicted $y$ will change if we increase $x_k$, *holding all of the other $x$'s constant*:
+
+$$b_j = \frac{\Delta \widehat y}{\Delta x_j} \Big|_{\text{all other $x$'s constant}}$$
+
+The fact that we are *controlling* for other $x$'s by holding them constant is what solves the OVB problem
+
+---
+
+In our multivariate model,
+
+$$y_i = \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \dots + \beta_k x_{ki} + \varepsilon$$
+
+where $\varepsilon$ is uncorrelated with $x_1, x_2, \dots, x_k$, so that (conditonal on the $x$'s) $E(\varepsilon)=0$
+
+The $\beta$'s represent the **causal effects** of the $x$'s on $y$
+
+If $x_j$ is uncorrelated with $\varepsilon$, $b_j$ will be an unbiased and consistent estimate of $\beta_j$
+
+---
+
+The idea is that we want to take omitted variables *out of the error term* by controlling for them in the model
+
+If we have done a good job of this, the part of the error term that remains will be uncorrelated with the $x$'s, and so the $b$'s will be good estimates of the $\beta$'s (which represent the causal effects of the $x$'s)
+
+In terms of our previous example, we are now comparing wages for people with different amounts of education but the *same* amount of ability
+
+---
+
+Let's do some simulations to illustrate OVB and multivariate regression
+
+```{r}
+b <- rep(0,1000)
+b1 <- rep(0,1000)
+for (i in 1:1000) {
+  x1 <- rnorm(100)
+  x2 <- 1 + 2*x1 + rnorm(100) #x1 is corr'd with x2
+  y <- 2 + 2*x1 + 3*x2 + rnorm(100)
+  b[i] <- lm(y~x1)$coef[2]
+  b1[i] <- lm(y~x1 + x2)$coef[2]
+}
+mean(b) # By the OVB formula, E(b) = 2 + 3*2 = 8
+mean(b1)
+```
+
+---
+
+Now let's look at a real world example. We'll start by regressing wages on schooling alone:
+
+```{r}
+library(tidyverse)
+gril <- read_csv("griliches.csv")
+gril$wage <- exp(gril$lw)
+model1 <- lm(wage ~ s, data=gril)
+summary(model1)
+```
+
+---
+
+This model omits IQ from the equation. Next, let's investigate the relationship between IQ and schooling:
+
+```{r}
+model2 <- lm(iq ~ s, data=gril)
+summary(model2)
+```
+
+---
+
+Finally, let's run a multivariate regression of wages on schooling *and* IQ:
+
+```{r}
+model3 <- lm(wage ~ s + iq, data=gril)
+summary(model3)
+```
+
+---
+
+In summary, a univariate regression of wages on schooling gives:
+
+$$\widehat{wage}_i = -125.3 + 33.51 * s$$
+
+But if IQ is related to both schooling and wages, this coefficient will only tell us a combination of the effect of schooling itself on wages and the effect of IQ on wages
+
+---
+
+If we run a multivariate regression that also controls for IQ, we get
+
+$$\widehat{wage}_i = -198.01 + 29.83*s + 1.18*iq$$
+
+The coefficient on schooling is now smaller, which suggests that the previous coefficient was biased up because we failed to control for IQ
+
+*If we believed* that IQ was the only omitted variable, we could interpret this as the effect of schooling on wages
+
+---
+
+We also know that the relationship between IQ and schooling is given by
+
+$$ \widehat{iq}_i = 61.88 +3.13 * s$$
+The OVB formula tells us that the coefficient from a regression of wages on schooling alone should equal
+
+$$E(b) = \beta_1 + \beta_2 * b_{iq, s} = 29.83 + 1.18 * 3.13 = 33.52,$$
+which is very close to what we actually got (the difference is due to rounding error)
+
+---
+
+## Correlation and causation revisited
+
+Previously, we asked:
+
+> Can we always interpret the regression coefficient as an estimate of the causal effect?
+
+The answer was:
+
+> *Not necessarily,* because there might be omitted variables
+
+---
+
+Now we know that if we're worried about OVB in a mode like
+
+$$y_i = \alpha + \beta_1 x_{1i} + u_i$$
+
+We can control for omitted variables (i.e., take them out of the error term and put them in the model) using a multivariate regression model:
+
+$$y_i = \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \dots + \beta_k x_{ki} + \varepsilon_i$$
+---
+
+This is *very* helpful, but it does raise another question:
+
+> How do we know if we have controlled for all of the relevant omitted variables? 
+
+Unfortunately, the answer is
+
+> *We don't.* The best we can do is think about potential omitted variables and try to control for them
+
+There is no way to guarantee that you are estimating a causal effect (the best you can do is try!)
+
+---
+
+In the wage example, when we omitted IQ, the coefficient on schooling was 33.51
+
+When we controlled for IQ, the coefficient on schooling was 29.83
+
+*If we thought that IQ was the only omitted variable*, this would tell us the causal effect
+
+But we might be able to come up with other omitted variables that might be correlated with schooling
+
+---
+
+## Regression anatomy
+
+Recall that in the multivariate regression
+
+$$y_i = \alpha + \beta_1 x_{1i} + \dots + \beta_k x_{ki} + \varepsilon_i,$$
+
+we interpret $\beta_1$ as the effect of $x_1$ on $y$, *holding $x_2$ through $x_k$ constant*
+
+We also saw that we do this by minimizing the sum of squared residuals with respect to all of the coefficients ($a$ and $b_1$--$b_k$)
+
+---
+
+It turns out that there is another way of thinking about this, which also leads to another way of estimating multiple regression coefficients
+
+According to the **regression anatomy formula**, we could also obtain the etiamte $b_1$ of $\beta_1$ using the following process:
+
+1. Regress $y$ on $x_2$ through $x_k$, and save the residuals $e_{y|x_2,\dots,x_k}$ 
+2. Regress $x_1$ on $x_2$ through $x_k$ and save the residuals $e_{x_1|x_2,\dots,x_k}$
+3. Regress the "$y$" residuals ($e_{y|x_2,\dots,x_k}$) on the "$x$" residuals ($e_{x_1|x_2,\dots,x_k}$)
+
+---
+
+It turns out (although we won't derive it), that the coefficient on the $x$ residuals from this regression is *exactly the same* as the coefficient $b_1$ from a multivariate regression of $y$ on $x_1$ through $x_k$
+
+---
+
+Why is this useful? There are two reasons:
+
+1. It reduces our multivariate regression (which is fairly complicated) to a univariate regression (which we understand pretty well)
+
+2. It has an intuitive interpretation: In a multiple regression, $\beta_1$ is the effect of $x_1$ on $y$, *holding $x_2$--$x_k$ constant.*
+
+    When we regress the $y$ residual on the $x$ residual, we are looking at the relationship between the "parts" of these variables that are not explained by $x_2$--$x_k$. The anatomy formula gives us another perspective on what it means to hold those variables constant
+
+---
+
+Two notes on this:
+
+1. The same logic applies to estimating any of the $\beta_j$'s, we only used $\beta_1$ as an example (e.g., to estimate $\beta_j$, you need the residuals from regressions of $y$ and $x_j$ on all of the $x$ variables *except* $x_j$)
+
+2. Although the coefficient estimate from the regression anatomy formula is the same as from a multivariate regression, the standard error from the regression anatomy version will not be right (this is because software like R doesn't know that the residuals are estimated quantities, rather than "known" data). Hence, you should always use multivariate regression to obtain regression estimates (the anatomy formula more useful as a *conceptual* tool)
+
+---
+
+Let's see the regression anatomy formula in action. Recall that, in the wage example, the multivariate regression coefficients are:
+
+```{r}
+model1 <- lm(wage ~ s + iq, data=gril)
+summary(model1)
+```
+
+---
+
+What about via regression anatomy?
+
+```{r}
+yresid <- lm(wage ~ iq, data=gril)$resid
+xresid <- lm(s ~ iq, data=gril)$resid
+reg.anatomy <- lm(yresid ~ xresid)
+summary(reg.anatomy)
+```
+
+The coefficient on `xresid` is exactly the same as before!
+
+---
+
+## Properties of multiple regression
+
+The regression anatomy formula shows that multivariate regression is really just univariate regression in disguise
+
+Hence, it inherits all of the properties of univariate regression that we previously proved:
+
+* It is unbiased: $E(b_j) = \beta_j$ (for $j=1,\dots,k$)
+* It is consistent: $b_j \to \beta_j$
+
+---
+
+Similarly, the variance of a multivariate regression coefficient is
+
+$$Var(b_1) = \frac{\sigma^2}{\sum_i e^2_{x_1|x_2,\dots,x_k}}$$
+
+where $\sigma^2$ is the variance of $\varepsilon$. Although we don't know this, we can estimate it using
+
+$$s^2 = \frac{\sum_i e_i^2}{n-k-1}$$
+
+Note that we divide by $n-k-1$ instead of $n-2$ because now we are using a multivariate regression
+
+---
+
+## Multicollinearity
+
+When there are only two $x$ variables, there is another way of expressing the variance of the regression coefficients that is somewhat easier to interpret
+
+It can be shown that
+
+$$Var(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)]^2 \sum_i (x_{1i} - \bar{x}_1)^2}$$
+
+---
+
+This allows us to answer the following question:
+
+> How does the variance of $b_1$ change when we add a new variable to our regression?
+
+If we start off with a regression of $y$ on $x_1$, we know that
+
+$$V(b_1) = \frac{\sigma^2}{\sum_i (x_{1i} - \bar{x}_1)^2}$$
+
+If we add $x_2$ to the regression, we have
+
+$$V(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)]^2 \sum_i (x_{1i} - \bar{x}_1)^2}$$
+
+---
+
+When we add $x_2$ to the regression, two things change:
+
+1. We are taking $x_2$ out of the error term and putting it into the model. Therefore, the $\sigma^2$ *decreases*, which tends to make $V(b_1)$ *smaller*
+
+2. Now we have the term $[1-Corr(x_1,x_2)]^2$ in the denominator. If $x_1$ and $x_2$ are highly corerlated, this term will be small, which tends to make $V(b_1)$ *larger*
+
+---
+
+**Multicollinearity** is when the second effect dominates, so that adding a new variable increases the variance of the estimated coefficient
+
+Intuitively, a multivariate regression compares $y$ for units with different values of $x_1$ but the same values of $x_2$. However, if $x_1$ and $x_2$ are highly correlated, there may not be many observations with different $x_1$ but the same $x_2$, so our effective sample size is small, leading to a large variance
+
+---
+
+As the intuition suggests, the solution to multicollinearity is to increase your sample size^[Formally, because this will increase the term $\sum_i (x_{1i} - \bar{x}_1)^2$, offsetting the correlation term]
+
+For this reason, multicollinearity has jokingly been called "micronumerosity," reflecting the fact that it isn't really a problem with your regression, just a challenge that can be overcome with a larger sample
+
+---
+
+There is a form of multicollinearity that is a little more problematic
+
+**Perfect multicolliearity** occurs when two variables are *perfectly* correlated
+
+Assuming a two-variable regression for simplicity,
+
+$$V(b_1)=\frac{\sigma^2}{[1-Corr(x_1, x_2)]^2 \sum_i (x_{1i}-\bar{x}_1)^2},$$
+$V(b_1)$ is not even defined in this case
+
+---
+
+In fact, the problem is worse: we can't even estimate the regression
+
+By regression anatomy, in the two-variable case:
+
+$$b_1 = \frac{\sum_i e_{y|x_2}e_{x_1|x_2}}{\sum_i e_{x_1|x_2}^2}$$
+
+But if $x_1$ and $x_2$ are perfectly correlated, $x_2$ perfectly predicts $x_1$, so $e_{x_1|x_2} = 0$ for all observations, and $b_1$ is not defined
+
+---
+
+Perfect multicollinearity can be a real problem, because in its presence, the regression coefficients can't be computed
+
+However, in most cases, running into perfect multicollinearity means that we're doing something silly
+
+For example, suppose we want to know the relationship between shoe size and height. We might estimate the equation:
+
+$$\text{height} = \alpha + \beta_1 \text{Left shoe size} + \beta_2 \text{Right shoe size}
++ \varepsilon$$
+
+---
+
+In most datasets, left and right shoe size will be the same, so we'll have perfect multicollineariy
+
+But the relationship between left shoe size and height is probably the same as the relationship between right shoe size and height, so we don't really need to know both (we can just drop one from the regression)
+
+---
+
+## Goodness of fit with multivariate regression
+
+Recall that
+
+$$R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2}$$
+
+This formula still applies for a multivariate regression
+
+---
+
+Also recall, though, that since OLS minimizes the SSR, including a new variable can never *increase* the SSR (if adding a new variable were to increase the SSR, OLS could always set the coefficient on that variable to zero, so that the SSR wouldn't change)
+
+But this means that adding a new variable can never *decrease* the $R^2$
+
+This raises the concern that analysts might try to add a bunch of useless variables to their regression in order to get a large $R^2$
+
+(Although there's no real point in dong this since no one really cares about the $R^2$)
+
+---
+
+To protect against this possibility, there is a variation on the $R^2$ that penalizes regressions for adding lots of variables
+
+The **adjusted** $R^2$ is
+
+$$\text{adj. } R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2} 
+\left( \frac{n-1}{n-k-1} \right)$$
+
+When $k$ is large, $(n-1)/(n-k-1)$ will be large, so the adjusted $R^2$ will be smaller
+
+Thus, the adjusted $R^2$ only increases if adding a new variable helps explain $y$ "a lot"
+
+---
+
+## Inference with multiple regression
+
+Now that we know how to estimate and interpret multiple regressions, we need to learn how to do statistical inference using them
+
+Fortunately, most of what we learned for the univariate case carries over, but there are a few new twists
+
+---
+
+Suppose that we want to test the null hypothesis that $\beta_j=0$. The test statistic for this is still $t = b_j / se(b_j)$
+
+However, in the univariate case, we said that this test statistic had a $t$ distribution with $n-2$ degrees of freedom
+
+In the multivariate case, since we are estimating more parameters, this test statistic will have a $t$ distribution with $n-k-1$ degrees of freedom (note that if $k=1$, this brings us back to the univariate case)
+
+Essentially, all this means is that we have to look up a different row in the t table when finding the appropriate critical value
+
+---
+
+Another difference is that, when we are running a multivariate regression, we might want to test **joint** hypotheses about **combinations** of coefficients
+
+For example, suppose we estimate the model
+
+$$y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \varepsilon$$
+
+Since this allows the coefficients on $x_1$--$x_3$ to be any value, we call this the **unrestricted** model
+
+Now suppose that we want to test the null hypothesis that $\beta_2 = 0$ and $\beta_3 = 0$
+
+How can we do this?
+
+---
+
+**Aside:** What is the difference between testing the joint null that $\beta_2=0$ and $\beta_3 = 0$ and doing individual tests of the nulls that $\beta_2=0$ and $\beta_3=0$? 
+
+If $x_2$ and $x_3$ are highly correlated, the SEs for $b_2$ and $b_3$ might be very large because of multicollinearity. But then the t-stats $b_2/se(b_2)$ and $b_3/se(b_3)$ would be small, and we might not be able to reject either null hypothesis, even if both $x_1$ and $x_2$ affect $y$
+
+We can circumvent this problem by testing the joint null hypothesis that "$\beta_2=0$ and $\beta_3=0$"
+
+---
+
+Under the null hypothesis that $\beta_2 = \beta_3 = 0$, the model becomes
+
+$$y = \alpha + \beta_1 x_1 + \varepsilon$$
+
+Since this restricts the coefficients on $x_2$ and $x_3$ (to be zero in this case), we call it the **restricted** model
+
+Here is the intuition behind our joint null hypothesis test: If the restriction that $\beta_2 = \beta_3 = 0$ is true, then when we drop $x_2$ and $x_3$ from the model, it shouldn't really matter, so the SSR shouldn't change. So if the SSR changes a lot when we drop them, we will reject the null
+
+---
+
+Formally, let $SSR_R$ be the SSR from the restricted model and $SSR_U$ be the SSR from the unrestricted model
+
+The **F-statistic** for our test is
+$$F = \frac{(SSR_R - SSR_U) / j}
+{SSR_U / (n - k - 1)},$$
+
+where $j$ is the *number of restrictions* (two in our example)
+
+Under the null hypothesis, this statistic has an $F(j,n-k-1)$ distribution^[An F-distribution with $j$ *numerator* degrees of freedom and $n-k-1$ *denominator* degrees of freedom. We divide by $SSR_U$ to ensure that the F-stat has a known distribution.]
+
+---
+
+To implement the test, we 
+
+1. Run the restricted and unrestricted models, and save the SSR from each
+2. Compute the F-statistic 
+3. We reject the null if the F-statistic exceeds the appropriate critical value $F_\alpha^{(j, n-k-1)}$ for our $\alpha$ level and degrees of freedom (we just look this up in an F-table, like [this one](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3673.htm))^[Recall that adding variables never increases the SSR, so $SSR_U \le SSR_R$, so $F \ge 0$]
+
+---
+
+Here's what this looks like for $\alpha=.05$ and an $F(2,100)$ distribution:
+
+```{r, echo=F}
+x <- seq(0, 5, by=.1)
+y <- df(x, 2, 100)
+plot(x,y, type="l")
+x2 <- seq(3.087, 5, length.out=50)
+y <- df(x2, 2, 100)
+polygon(c(x2, 3.087, 3.087), c(y, 0, df(3.087, 2, 100)), col = adjustcolor("blue", alpha.f=.75), border = NA)
+mtext(expression("F"[.05]^"(2,100)"~"=3.087"), 1, line=3, at=3.087)
+```
+
+
+
+---
+
+Let's use our wage example to test the null that neither experience nor tenure affect wages:
+
+```{r}
+model.u <- lm(wage ~ s + expr + tenure, data=gril)
+model.r <- lm(wage ~ s, data=gril)
+ssr.u <- sum(model.u$residuals^2)
+ssr.r <- sum(model.r$residuals^2)
+f.stat <- ((ssr.r - ssr.u)/2)/(ssr.u/754)
+f.stat
+```
+
+---
+
+From [this F table](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3673.htm), the critical value for a test with $\alpha$-level .05, 2 numerator degrees of freedom, and 754 denominator degrees of freedom^[Actually, the highest it goes is 100, which is what I'm using] is about 3.087
+
+Since 34.16 > 3.087, we reject the null that $\beta_2 = 0$ and $\beta_3=0$
+
+---
+
+It's nice to know how to do this "by hand," but we usually let software help us implement the test. In this case, we can use
+
+```{r}
+library(car)
+linearHypothesis(model.u, c("expr = 0", "tenure = 0"))
+```
+
+Note that we don't really need to estimate the restricted model (R will handle that automagically)
+
+---
+
+You might have noticed that R automatically reports something called "F-statistic" when you run a regression. This is the F-statistic for the joint null hypothesis that $\beta_1 = \beta_2 = \dots = \beta_k = 0$ (i.e., all of the variables are jointly statistically insignificant)
+
+```{r}
+summary(model.u)
+```
+
+---
+
+We can also use this to test other kinds of joint hypotheses
+
+Suppose that our null is that the coefficients on experience and tenure are the same. Now the restricted model is
+
+$$ y = \alpha + \beta_1 educ  + \beta_2 expr + \beta_2 tenure + \varepsilon$$
+
+We could do this manually by defining a new variable $z = expr + tenure$, then regressing $y$ on $educ$ and $z$ to get $SSR_R$
+
+---
+
+```{r}
+gril$z <- gril$expr + gril$tenure
+model.r2 <- lm(wage ~ s + z, data=gril)
+ssr.r2 <- sum(model.r2$resid^2)
+F.2 <-((ssr.r2 - ssr.u)/1) / (ssr.u /754) 
+F.2
+qf(.05, 1, 754, lower.tail=FALSE)
+```
+Now there is only one restriction, so from [this table](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3673.htm) the critical value is 3.936. Since .11<3.936, we fail to reject
+
+Actually, the last line shows that we can also get R to tell us the exact critical value (3.85 in this case). We still fail to reject
+
+---
+
+In practice, though, we can just use the canned function:
+
+```{r}
+linearHypothesis(model.u, c("expr = tenure"))
+```
+
+Here, we can see from the p-value that we fail to reject the null
+
+
+# MOAR examples!
+
+Now that we understand multivariate regression, let's look at some more empirical examples
+
+First, we'll examine the effect of capital punishment (i.e., the death penalty) on murder rates
+
+Our file is in Stata format, so we'll use the `haven` package to import it into R:
+
+```{r}
+library(haven)
+mur <- read_dta("MURDER.dta")
+```
+
+---
+
+We can use the `summary` command to get some descriptive statistics for the data in the file (it's always a good idea to get to know your data before you dive into any analysis)
+
+The key variables are the murder rate per 100K (`mrdrte`) and the number of executions in the past three years (`exec`)
+
+```{r}
+summary(mur)
+```
+
+---
+
+Let's look at a plot of murders against executions:
+
+```{r}
+ggplot(data=mur, aes(x=exec, y=mrdrte)) + geom_point() 
+```
+
+---
+
+The relationship appears positive, but we can clarify by adding a "line of best fit" (which is really just a regression line)
+
+```{r}
+ggplot(data=mur, aes(x=exec, y=mrdrte)) + geom_point() + geom_smooth(method='lm')
+```
+
+---
+
+Now let's examine the relationship using a regression:
+
+```{r}
+mur.mod1 <- lm(mrdrte ~ exec, data=mur)
+summary(mur.mod1)
+```
+
+---
+
+This suggests that the murder rate is positively (and statistically significantly) associated with the number of executions
+
+Taken literally, the coefficient of .248 would mean that for every additional execution, there are an additional .248 murders per 100K people
+
+To put this into context, in 2023, the population of Memphis was 618,639, or about 6.19 thousand. Thus, each additional execution would *increase* the number of murders by $6.19*.248 \approx 1.5$
+
+The $R^2$ of .01 means that executions only explain about 1% of the variation in the murder rate
+
+---
+
+Does it make sense that executions increase murders? Some people think capital punishment deters crime, but worst-case scenario, it probably has no effect
+
+What's probably happening is that areas that already have high crime also tend to execute more prisoners
+
+I.e., if the model is
+
+$$mrdrte = \alpha + \beta exec + \varepsilon,$$
+
+the other factors $\varepsilon$ that determine the murder rate are *correlated* with the number of executions
+
+---
+
+Let's see what happens if we control for some of these factors. We'll start with the unemployment rate
+
+```{r}
+mur.mod2 <- lm(mrdrte ~ exec + unem, data=mur)
+summary(mur.mod2)
+```
+Now the murder rate is positive, but statistically insignificant. This suggests that areas with worse economic conditions have more murders but also tend to execute more people
+
+---
+
+It's also possible that both the murder rate and the number of executions just happen to change over time. We can control for this by including variables indicating whether an observation corresponds to a particular year
+
+```{r}
+mur.mod3 <- lm(mrdrte ~ exec + unem + as.factor(year), data=mur)
+summary(mur.mod3)
+```
+The coefficient on `exec` is still statistically insignificant
+
+---
+
+Finally, we might think that certain states just always tend to have more murders and execute more prisoners. We can control for this by including variables that indicate whether a particular observation corresponds to a particular state
+
+```{r}
+mur.mod4 <- lm(mrdrte ~ exec + unem + as.factor(year) + as.factor(state), data=mur)
+summary(mur.mod4)
+```
+
+---
+
+Ok, that's a lot of variables, but after including all of these control variables, the coefficient on executions is no longer positive
+
+This makes more sense, since it no longer suggests that executions increase murders
+
+Unfortunately for proponents of capital punishment, the coefficient is still statistically insignificant, so there is no evidence of a deterrent effect either
+
+---
+
+Let's do one more example, this time focusing on the relationshp between attendance and academic performance. Here the key variables are the number of classes attended out of 32 (`attend`) a student attended and their GPA for the term (`termGPA`)
+
+```{r}
+att <- read_dta("ATTEND.dta")
+summary(att)
+```
+
+---
+
+```{r}
+ggplot(data=att, aes(x=attend, y=termGPA)) + geom_point() + geom_smooth(method='lm')
+```
+
+---
+
+The graph suggests it's a good thing you're here. Let's take a look at the regression:
+
+```{r}
+att.mod1 <- lm(termGPA ~ attend, data=att)
+summary(att.mod1)
+```
+
+---
+
+Attendance is positive and highly statistically significant
+
+The coefficient of .08 means that for every additional class attended, GPA increases by .08. Perfect attendance would increase your GPA by 2.56 points -- not bad
+
+The $R^2$ of .31 suggests that attendance alone explains 31% of the variation in GPA
+
+---
+
+But what if there is omitted variable bias? Maybe really good students just happen to attend class more, but they would have done well in their classes even if they didn't attend them. Let's try to control for this by including ACT score and prior GPA as regressors:
+
+```{r}
+att.mod2 <- lm(termGPA ~ attend + ACT + priGPA, data=att)
+summary(att.mod2)
+```
+
+---
+
+The regression suggests that there's a *bit* of that going on, because now the coefficient on `attend` shrinks to .05. But it's still positive and statistically significant
+
+If we believed that `ACT` and `priGPA` were the only omitted variables, we could conclude that each additional class attended increases one's GPA by about .05 points (or an extra 1.5 GPA points for perfect attendance)
+
+I guess I'll see you next time
+
+---
+
+Let's test the hypothesis that the effect of attendance is the same as the effect of one's ACT score (i.e., $\beta_\text{attend} = \beta_\text{ACT}$):
+
+```{r}
+library(car)
+linearHypothesis(att.mod2, c("attend = ACT"))
+```
+The null is easily rejected
+
+---
+
+## Presenting regression results
+
+This is a good place to discuss how to communicate the results from your regressions
+
+Results from simple regressions are often presented as equations, with standard errors in parentheses, like this:
+
+$$\widehat{gpa}_i = \underset{(0.114)}{.625} + \underset{(0.004)}{.076} \cdot attend_i$$
+
+Of course, if you use this, you might want to also note the sample size, $R^2$, and any other important stats (like F tests, etc.)
+
+---
+
+When you have more than one regression, it's helpful to present the results as a table that compares different models
+
+There are a few different R packages that allow you to do this
+
+---
+
+```{r}
+library(texreg)
+screenreg(list(att.mod1, att.mod2))
+```
+
+This also gives you extra info like sample size, $R^2$, etc. You can also use these packages to export to formats that can be pasted into Word processors
+
+---
+
+Since we're on the subject of how things should be presented...
+
+Real empirical work should always start with simple descriptive statistics (means, standard deviations, maybe even some simple correlations and graphs)
+
+I haved been using `summary()` to get quick descriptive statistics, but these are a little too basic
+
+R has a few different packages that you can use to get better descriptives
+
+---
+
+A simple one is the `describe` function in the `psych` package (here I'm using some options to turn off stats I'm not interested in)
+
+
+```{r}
+library(psych)
+describe(att, fast=TRUE, skew=FALSE)
+```
+
+---
+
+You can also get summary statistics within groups
+
+```{r}
+describe(att ~ frosh, fast=T, skew=F)
+```
+
+
+
+
