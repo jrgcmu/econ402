@@ -10,7 +10,7 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 * Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Regression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.R)
 
-* Regression, part II: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.R)
+* Regression, part II: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.R)
 
 * Inference: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Inference.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Inference.R)
 
@@ -20,7 +20,7 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 * Endogeneity: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.R)
 
-* Specification: [slides](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.R)
+* Specification: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.R)
 
 ## Notes on the notes
 
