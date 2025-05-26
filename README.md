@@ -4,23 +4,23 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 ## Course materials
 
-* Background
+* Background: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html), [R files](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.R)
 
-* Introduction: [slides](CourseFiles/Intro.html), [R commands](CourseFiles/Intro.R)
+* Introduction: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Intro.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Intro.R)
 
-* Regression, part I: [slides](CourseFiles/Regression.html), [R commands](CourseFiles/Regression.R)
+* Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Regression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.R)
 
-* Regression, part II: [slides](CourseFiles/Regression2.html), [R commands](CourseFiles/Regression2.R)
+* Regression, part II: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.R)
 
-* Inference: [slides](CourseFiles/Inference.html), [R commands](CourseFiles/Inference.R)
+* Inference: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Inference.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Inference.R)
 
-* Multivariate regression: [slides](CourseFiles/MultiRegression.html), [R commands](CourseFiles/MultiRegression.R)
+* Multivariate regression: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/MultiRegression.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/MultiRegression.R)
 
-* Heteroskedasticity and autocorrelation: [slides](CourseFiles/HetAuto.html), [R commands](CourseFiles/HetAuto.R)
+* Heteroskedasticity and autocorrelation: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/HetAuto.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/HetAuto.R)
 
-* Endogeneity: [slides](CourseFiles/Endog.html), [R commands](CourseFiles/Endog.R)
+* Endogeneity: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.R)
 
-* Specification: [slides](CourseFiles/Spec.html), [R commands](CourseFiles/Spec.R)
+* Specification: [slides](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.html), [R commands](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.R)
 
 ## Notes on the notes
 
