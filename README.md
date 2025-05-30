@@ -26,4 +26,4 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 To save the HTML slides as PDFs, go to the menu on the bottom left, select *Tools: PDF Export Mode*, then use *File: Print* to save a PDF.
 
-All of the data filsed used in the R commands, as well as the files used to generate the slides, are available in the CourseFiles folder.
+All of the data files used in the R commands, as well as the files used to generate the slides, are available in the CourseFiles folder.
