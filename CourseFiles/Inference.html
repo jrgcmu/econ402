@@ -1217,7 +1217,7 @@ margin-right: 0; }
 <p>We know that <span class="math inline">\(b\)</span> is a good <em>estimate</em> of <span class="math inline">\(\beta\)</span></p>
 <p>It is unbiased: <span class="math inline">\(E(b)=\beta\)</span></p>
 <p>It is consistent: <span class="math inline">\(b \underset{n \to \infty}{\to} \beta\)</span></p>
-<p>But it still only an estimate</p>
+<p>But it’s still only an estimate</p>
 <p>We want a better idea of what we can say about <span class="math inline">\(\beta\)</span> given our estimate <span class="math inline">\(b\)</span></p>
 </section>
 <section id="the-normal-distribution" class="slide level2">
@@ -1293,7 +1293,7 @@ margin-right: 0; }
 <p>We want to test this using <span class="math inline">\(b\)</span></p>
 <p>We know that <span class="math inline">\(b\)</span> is normally distributed</p>
 <p>Since <span class="math inline">\(b\)</span> is unbiased, under the null, the mean of <span class="math inline">\(b\)</span> is 0</p>
-<p>Let’s also take <span class="math inline">\(b\)</span> and <em>standardize it</em> by diving by the standard deviation of <span class="math inline">\(b\)</span></p>
+<p>Let’s also take <span class="math inline">\(b\)</span> and <em>standardize it</em> by dividing by the standard deviation of <span class="math inline">\(b\)</span></p>
 <p>This makes it so that the normalized quantity <span class="math inline">\(b/sd(b)\)</span> has a <em>standard normal</em> distribution (a mean of 0 and a variance of 1)</p>
 </section>
 <section class="slide level2">
@@ -1436,7 +1436,7 @@ F-statistic: 256.1 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb4-9"><a href="#cb4-9"></a>}</span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="fu">mean</span>(<span class="fu">abs</span>(t)<span class="sc">&gt;</span><span class="fl">1.96</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.05</code></pre>
+<pre><code>[1] 0.054</code></pre>
 </div>
 </div>
 </section>
@@ -1457,7 +1457,7 @@ F-statistic: 256.1 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>E.g.: Suppose we want to test the null hypothesis that <span class="math inline">\(\beta=30\)</span></p>
 <p>Now that t-stat is <span class="math display">\[t = \frac{33.5-30}{2.1} = \frac{3.5}{2.1} \approx 1.66\]</span></p>
 <p>Since <span class="math inline">\(|1.66| &lt; 1.96\)</span>, we <em>fail to reject</em> this null hypothesis</p>
-<p>We can easily reject the null that there is no effect, but we can’t reject the null of an effect 30</p>
+<p>We can easily reject the null that there is no effect, but we can’t reject the null of an effect of 30</p>
 </section>
 <section id="one-sided-hypothesis-tests" class="slide level2">
 <h2>One-sided hypothesis tests</h2>
@@ -1524,7 +1524,7 @@ F-statistic: 256.1 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb6-11"><a href="#cb6-11"></a>}</span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="fu">mean</span>(in.ci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.936</code></pre>
+<pre><code>[1] 0.946</code></pre>
 </div>
 </div>
 </section>

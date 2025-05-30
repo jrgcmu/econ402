@@ -120,7 +120,7 @@ Let's illustrate some of these failures with a simulation
 
 Previously, we did simulations to show that (under homoskedasticity), our Type-I error rates and confidence intervals were reliable
 
-Let's look at how those simulations hold up under homoskedasticity
+Let's look at how those simulations hold up under heteroskedasticity
 
 ---
 
@@ -317,9 +317,9 @@ To see how, recall that heteroskedasticity occurs when $\sigma_i^2 = E(\varepsil
 Also recall that the linear regression model implies that
 
 $$E(y_i) = \alpha + \beta x_i$$
-Thus, if we *knew* $\varepsilon_i$, we could test for heteroskedasticity by regression $\varepsilon_i^2$ on $x_i$, since this would tell us how $\sigma_i^2 = E(\varepsilon_i^2)$ is related to $x_i$
+Thus, if we *knew* $\varepsilon_i$, we could test for heteroskedasticity by regressing $\varepsilon_i^2$ on $x_i$, since this would tell us how $\sigma_i^2 = E(\varepsilon_i^2)$ is related to $x_i$
 
-Although we don't have data on $\varepsilon_i$, we know that we can use $e_i$ as it's "stand in"
+Although we don't have data on $\varepsilon_i$, we know that we can use $e_i$ as its "stand in"
 
 ---
 
@@ -333,7 +333,7 @@ Under homoskedasticity, $e_i^2$ and $x_i$ shouldn't be related, so the $R^2$ fro
 
 Technically, the test statistic is $n R^2$, which has a $\chi^2$ ("chi square") distribution with 2 degrees of freedom. So we reject the null if $n R^2$ is bigger than the $\chi^2_{\alpha}(2)$ critical value, which we can look up [online](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm) (or we can get R to tell us, see below)
 
-Alternatively, we can use an F-test of the joint null hypothesis that the coefficient on $x$ and $x^2$ are zero
+Alternatively, we can use an F-test of the joint null hypothesis that the coefficients on $x$ and $x^2$ are zero
 
 ---
 
@@ -381,7 +381,7 @@ As another example, consider the familiar model
 
 $$wage_i = \alpha + \beta educ_i + \varepsilon_i$$
 
-Here, $\varepsilon_i$ represents all of the factors *besides* education that affects the wage
+Here, $\varepsilon_i$ represents all of the factors *besides* education that affect the wage
 
 Since individuals living in the same state may face similar local economic conditions (another factor affecting wages), their errors might be correlated
 

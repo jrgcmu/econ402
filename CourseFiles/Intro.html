@@ -1305,7 +1305,7 @@ margin-right: 0; }
 <section class="slide level2">
 
 <p>Let’s investigate this using some data on hourly wages (measured in cents), education, and a bunch of other variables</p>
-<p>We’ll load these data, along with some useful “package” that extend R’s capabilities.</p>
+<p>We’ll load these data, along with some useful “package” that extend R’s capabilities</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>card <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;card.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1411,7 +1411,7 @@ margin-right: 0; }
 <section class="slide level2">
 
 <p><strong>Regression</strong> is a way of using data to <em>estimate</em> the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> in our model</p>
-<p>Our estimated regression will look take the form:</p>
+<p>Our estimated regression will take the form:</p>
 <p><span class="math display">\[\widehat{wage} = a + b \cdot educ\]</span></p>
 <p>The “hat” on wage means that this equation is a <strong>prediction</strong> of the wage for someone with a particular amount of education</p>
 </section>
@@ -1569,7 +1569,7 @@ F-statistic: 115.2 on 4 and 2035 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section class="slide level2">
 
 <p>We might also be concerned that people inherit some of their abilities from their parents</p>
-<p>To try to address this, let’s control for parental education and whether individual’s grew up in a household where someone had a library card</p>
+<p>To try to address this, let’s control for parental education and whether individuals grew up in a household where someone had a library card</p>
 </section>
 <section class="slide level2">
 

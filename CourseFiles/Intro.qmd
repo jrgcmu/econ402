@@ -127,7 +127,7 @@ The first theory says that education should affect wages, while the second says 
 
 Let's investigate this using some data on hourly wages (measured in cents), education, and a bunch of other variables
 
-We'll load these data, along with some useful "package" that extend R's capabilities. 
+We'll load these data, along with some useful "package" that extend R's capabilities
 
 ```{r}
 library(tidyverse)
@@ -167,7 +167,7 @@ $\varepsilon$ is called the **error term,** and it reflects the fact that wages 
 
 **Regression** is a way of using data to *estimate* the parameters $\alpha$ and $\beta$ in our model
 
-Our estimated regression will look take the form:
+Our estimated regression will take the form:
 
 $$\widehat{wage} = a + b \cdot educ$$
 
@@ -292,7 +292,7 @@ When we hold IQ and KWW constant, the apparent relationship between education an
 
 We might also be concerned that people inherit some of their abilities from their parents
 
-To try to address this, let's control for parental education and whether individual's grew up in a household where someone had a library card
+To try to address this, let's control for parental education and whether individuals grew up in a household where someone had a library card
 
 ---
 

@@ -1361,11 +1361,11 @@ E(b) &amp;= E\left(\frac{\sum_i x_{1i} y_i}{\sum_i x_{1i}^2}\right)
 <span id="cb1-9"><a href="#cb1-9"></a>}</span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="fu">mean</span>(b) <span class="co"># By the OVB formula, E(b) = 2 + 3*2 = 8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.996808</code></pre>
+<pre><code>[1] 8.001681</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">mean</span>(b1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.995311</code></pre>
+<pre><code>[1] 1.994156</code></pre>
 </div>
 </div>
 </section>
@@ -1523,7 +1523,7 @@ F-statistic: 133.7 on 2 and 755 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section class="slide level2">
 
 <p>It turns out that there is another way of thinking about this, which also leads to another way of estimating multiple regression coefficients</p>
-<p>According to the <strong>regression anatomy formula</strong>, we could also obtain the etiamte <span class="math inline">\(b_1\)</span> of <span class="math inline">\(\beta_1\)</span> using the following process:</p>
+<p>According to the <strong>regression anatomy formula</strong>, we could also obtain the estimate <span class="math inline">\(b_1\)</span> of <span class="math inline">\(\beta_1\)</span> using the following process:</p>
 <ol type="1">
 <li>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_2\)</span> through <span class="math inline">\(x_k\)</span>, and save the residuals <span class="math inline">\(e_{y|x_2,\dots,x_k}\)</span></li>
 <li>Regress <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span> through <span class="math inline">\(x_k\)</span> and save the residuals <span class="math inline">\(e_{x_1|x_2,\dots,x_k}\)</span></li>
@@ -1656,7 +1656,8 @@ F-statistic: 151.2 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section class="slide level2">
 
 <p><strong>Multicollinearity</strong> is when the second effect dominates, so that adding a new variable increases the variance of the estimated coefficient</p>
-<p>Intuitively, a multivariate regression compares <span class="math inline">\(y\)</span> for units with different values of <span class="math inline">\(x_1\)</span> but the same values of <span class="math inline">\(x_2\)</span>. However, if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated, there may not be many observations with different <span class="math inline">\(x_1\)</span> but the same <span class="math inline">\(x_2\)</span>, so our effective sample size is small, leading to a large variance</p>
+<p>Intuitively, a multivariate regression compares <span class="math inline">\(y\)</span> for units with different values of <span class="math inline">\(x_1\)</span> but the same values of <span class="math inline">\(x_2\)</span></p>
+<p>However, if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated, there may not be many observations with different <span class="math inline">\(x_1\)</span> but the same <span class="math inline">\(x_2\)</span>, so our effective sample size is small, leading to a large variance</p>
 </section>
 <section class="slide level2">
 
@@ -1701,7 +1702,7 @@ F-statistic: 151.2 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Also recall, though, that since OLS minimizes the SSR, including a new variable can never <em>increase</em> the SSR (if adding a new variable were to increase the SSR, OLS could always set the coefficient on that variable to zero, so that the SSR wouldn’t change)</p>
 <p>But this means that adding a new variable can never <em>decrease</em> the <span class="math inline">\(R^2\)</span></p>
 <p>This raises the concern that analysts might try to add a bunch of useless variables to their regression in order to get a large <span class="math inline">\(R^2\)</span></p>
-<p>(Although there’s no real point in dong this since no one really cares about the <span class="math inline">\(R^2\)</span>)</p>
+<p>(Although there’s no real point in doing this since no one really cares about the <span class="math inline">\(R^2\)</span>)</p>
 </section>
 <section class="slide level2">
 
@@ -1978,7 +1979,7 @@ F-statistic: 1.597 on 1 and 151 DF,  p-value: 0.2082</code></pre>
 </section>
 <section class="slide level2">
 
-<p>This suggests that the murder rate is positively (and statistically significantly) associated with the number of executions</p>
+<p>This suggests that the murder rate is positively (but not statistically significantly) associated with the number of executions</p>
 <p>Taken literally, the coefficient of .248 would mean that for every additional execution, there are an additional .248 murders per 100K people</p>
 <p>To put this into context, in 2023, the population of Memphis was 618,639, or about 6.19 thousand. Thus, each additional execution would <em>increase</em> the number of murders by <span class="math inline">\(6.19*.248 \approx 1.5\)</span></p>
 <p>The <span class="math inline">\(R^2\)</span> of .01 means that executions only explain about 1% of the variation in the murder rate</p>
@@ -2019,7 +2020,11 @@ Multiple R-squared:  0.06226,   Adjusted R-squared:  0.04976
 F-statistic:  4.98 on 2 and 150 DF,  p-value: 0.008055</code></pre>
 </div>
 </div>
-<p>Now the murder rate is positive, but statistically insignificant. This suggests that areas with worse economic conditions have more murders but also tend to execute more people</p>
+</section>
+<section class="slide level2">
+
+<p>Now the coefficient on murder rate is smaller (and statistically insignificant)</p>
+<p>This suggests that areas with worse economic conditions have more murders but also tend to execute more people</p>
 </section>
 <section class="slide level2">
 
@@ -2143,7 +2148,7 @@ F-statistic: 17.37 on 54 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section class="slide level2">
 
-<p>Let’s do one more example, this time focusing on the relationshp between attendance and academic performance. Here the key variables are the number of classes attended out of 32 (<code>attend</code>) a student attended and their GPA for the term (<code>termGPA</code>)</p>
+<p>Let’s do one more example, this time focusing on the relationshp between attendance and academic performance. Here the key variables are the number of classes out of 32 (<code>attend</code>) a student attended and their GPA for the term (<code>termGPA</code>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>att <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;ATTEND.dta&quot;</span>)</span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="fu">summary</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

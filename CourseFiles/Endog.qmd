@@ -63,7 +63,7 @@ If $x_2$ is correlated with $x_1$, the $\varepsilon$ will be as well
 
 ---
 
-We already know that the coefficient on $x_1$ from a model that excludes $x_2$ is
+We already know that the expectation of the coefficient on $x_1$ from a model that excludes $x_2$ is
 
 $$E(b) = \beta_1 + \beta_2 b_{x_2 x_1}$$
 
@@ -346,7 +346,7 @@ If we also thought that $x_2$ were endogenous, we'd need an additional IV for th
 
 Although we can implement our two-stage procedure manually, it's better to use a pre-programmed IV/2SLS function
 
-The reason for this is that when we 2SLS manually, our software tries to estimate $\varepsilon$ as $e_i = y_i - b^{IV} \widehat{x}_i$, when what we really want is $y_i - b^{IV} x_i$ (i.e., using the *real*, rather than predicted, $x$)
+The reason for this is that when we do 2SLS manually, our software tries to estimate $\varepsilon$ as $e_i = y_i - b^{IV} \widehat{x}_i$, when what we really want is $y_i - b^{IV} x_i$ (i.e., using the *real*, rather than predicted, $x$)
 
 A pre-programmed IV function will handle this automatically
 
@@ -543,6 +543,7 @@ summary(model.2)
 After including these controls, the coefficient on education is now *larger*
 
 If anything, this suggests that our previous coefficient estimate might have been biased *down* 
+
 This can happen if educ is *negatively* correlated with the variables that were previously part of the error term
 
 ---

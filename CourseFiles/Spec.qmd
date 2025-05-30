@@ -22,7 +22,7 @@ We're not going to *relax* this assumption so much as *build on it* in order to 
 
 **Specification** refers to the variables included in a regression, and the way that they are included
 
-As we'll see, we can use econometric specification techniques to learn even more from our regrssions
+As we'll see, we can use econometric specification techniques to learn even more from our regressions
 
 ---
 
@@ -59,7 +59,7 @@ So the *difference* in predictions between those with $d=1$ and those with $d=0$
 $$\widehat{y}_i \big|_{d=1} - \widehat{y}_i \big|_{d=0} 
 = (a + b_1 x_i + b_2) - (a + b_1 x_i) = b_2$$
 
-To summarize, the coefficient on the dummy tells us the difference in preditions for those where the dummy is true relative to those where it isn't
+To summarize, the coefficient on the dummy tells us the difference in predictions for those where the dummy is true relative to those where it isn't
 
 ---
 
@@ -127,7 +127,7 @@ For those in the South, it's
 
 $$
 \begin{aligned}
-\widehat{wage}|_{south=1}& = a + b_1 \cdot educ + b2 + b_2 \cdot ecuc \\
+\widehat{wage}|_{south=1}& = a + b_1 \cdot educ + b2 + b_2 \cdot educ \\
 &= (a + b_2) + (b_1 + b_2) educ
 \end{aligned}
 $$
@@ -232,7 +232,7 @@ Also suppose that only the time-invariant part $c_i$ is correlated with the erro
 
 ---
 
-In this case, we can control for these time-invariance components by including dummy variables for each individual in our sample:
+In this case, we can control for these time-invariant components by including dummy variables for each individual in our sample:
 
 $$y_{it} = \alpha + \beta x_{it} + \sum_{j=1}^N c_j d^j_{it} + u_{it}$$
 
@@ -246,7 +246,7 @@ Intuitively, the fixed effects capture anything about a particular unit that doe
 
 Fixed effects are a nice way to try to address endogeneity when you have panel data^[They can also be used in other situataions where there are multiple observations belonging to the same "group." For example, you could include fixed effects for the states where individuals live]
 
-However, they only completely address endogeneity if the omitted-variables of concern are truly time invariant, which is a strong assumption
+However, they only completely address endogeneity if the omitted variables of concern are truly time invariant, which is a strong assumption
 
 Since FEs capture *everything* that doesn't change over time, they also capture the effect of time-invariant *observable* variables, so we can't include those in a regression that has FEs
 
@@ -319,7 +319,7 @@ summary(lf.model)
 According to this model, inter alia,
 
 * A woman with kids less than 6 is 17% less likely to be in the labor force
-* Each additional year of education increases the probability of being n the labor force by 5%
+* Each additional year of education increases the probability of being in the labor force by 5%
 * Every additional dollar that her husband makes per hour decreases her probability of beig in the labor force by about 1%
 
 ---
@@ -497,7 +497,7 @@ plot(x, y, type="b", xlab="x", ylab="f(x)")
 
 ---
 
-We can use **quadratics** to capture these kinds of non-linear relationshps using a regression
+We can use **quadratics** to capture these kinds of non-linear relationships using a regression
 
 Suppose we estimate the model
 
@@ -626,6 +626,8 @@ $$100 \cdot b = \frac{100(\Delta \widehat{y}/\widehat{y})}
 {\Delta x} = \frac{\% \Delta \widehat{y}}{\Delta x}$$
 
 Therefore, we can interpret $b$ as the % change in $y$ that will occur if $x$ increases by 1 unit
+
+**Note:** It can be shown that we can still use this interpretation even when $x$ is a dummy variable (even though in that case it doesn't make sense to take derivatives with respect to $x$)
 
 ---
 

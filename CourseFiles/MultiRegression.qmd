@@ -333,7 +333,7 @@ We also saw that we do this by minimizing the sum of squared residuals with resp
 
 It turns out that there is another way of thinking about this, which also leads to another way of estimating multiple regression coefficients
 
-According to the **regression anatomy formula**, we could also obtain the etiamte $b_1$ of $\beta_1$ using the following process:
+According to the **regression anatomy formula**, we could also obtain the estimate $b_1$ of $\beta_1$ using the following process:
 
 1. Regress $y$ on $x_2$ through $x_k$, and save the residuals $e_{y|x_2,\dots,x_k}$ 
 2. Regress $x_1$ on $x_2$ through $x_k$ and save the residuals $e_{x_1|x_2,\dots,x_k}$
@@ -442,7 +442,9 @@ When we add $x_2$ to the regression, two things change:
 
 **Multicollinearity** is when the second effect dominates, so that adding a new variable increases the variance of the estimated coefficient
 
-Intuitively, a multivariate regression compares $y$ for units with different values of $x_1$ but the same values of $x_2$. However, if $x_1$ and $x_2$ are highly correlated, there may not be many observations with different $x_1$ but the same $x_2$, so our effective sample size is small, leading to a large variance
+Intuitively, a multivariate regression compares $y$ for units with different values of $x_1$ but the same values of $x_2$
+
+However, if $x_1$ and $x_2$ are highly correlated, there may not be many observations with different $x_1$ but the same $x_2$, so our effective sample size is small, leading to a large variance
 
 ---
 
@@ -506,7 +508,7 @@ But this means that adding a new variable can never *decrease* the $R^2$
 
 This raises the concern that analysts might try to add a bunch of useless variables to their regression in order to get a large $R^2$
 
-(Although there's no real point in dong this since no one really cares about the $R^2$)
+(Although there's no real point in doing this since no one really cares about the $R^2$)
 
 ---
 
@@ -730,7 +732,7 @@ summary(mur.mod1)
 
 ---
 
-This suggests that the murder rate is positively (and statistically significantly) associated with the number of executions
+This suggests that the murder rate is positively (but not statistically significantly) associated with the number of executions
 
 Taken literally, the coefficient of .248 would mean that for every additional execution, there are an additional .248 murders per 100K people
 
@@ -758,7 +760,12 @@ Let's see what happens if we control for some of these factors. We'll start with
 mur.mod2 <- lm(mrdrte ~ exec + unem, data=mur)
 summary(mur.mod2)
 ```
-Now the murder rate is positive, but statistically insignificant. This suggests that areas with worse economic conditions have more murders but also tend to execute more people
+
+---
+
+Now the coefficient on murder rate is smaller (and statistically insignificant)
+
+This suggests that areas with worse economic conditions have more murders but also tend to execute more people
 
 ---
 
@@ -789,7 +796,7 @@ Unfortunately for proponents of capital punishment, the coefficient is still sta
 
 ---
 
-Let's do one more example, this time focusing on the relationshp between attendance and academic performance. Here the key variables are the number of classes attended out of 32 (`attend`) a student attended and their GPA for the term (`termGPA`)
+Let's do one more example, this time focusing on the relationshp between attendance and academic performance. Here the key variables are the number of classes out of 32 (`attend`) a student attended and their GPA for the term (`termGPA`)
 
 ```{r}
 att <- read_dta("ATTEND.dta")

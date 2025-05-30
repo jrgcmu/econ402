@@ -19,7 +19,7 @@ The covariance and correlation tell us about the "relationship" between variable
 
 -   What is the **prediction** of $y$ given a value of $x$?
 -   How does the prediction of $y$ change when $x$ changes?
--   What is the **causal effect** of $x$ on $y$
+-   What is the **causal effect** of $x$ on $y$?
 
 The last two aren't always the same thing, we'll have a lot to say about when a statistical relationship can also be interpreted as a causal effect
 

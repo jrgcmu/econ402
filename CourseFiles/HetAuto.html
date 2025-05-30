@@ -1291,7 +1291,7 @@ margin-right: 0; }
 
 <p>Let’s illustrate some of these failures with a simulation</p>
 <p>Previously, we did simulations to show that (under homoskedasticity), our Type-I error rates and confidence intervals were reliable</p>
-<p>Let’s look at how those simulations hold up under homoskedasticity</p>
+<p>Let’s look at how those simulations hold up under heteroskedasticity</p>
 </section>
 <section class="slide level2">
 
@@ -1493,8 +1493,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 <p>To see how, recall that heteroskedasticity occurs when <span class="math inline">\(\sigma_i^2 = E(\varepsilon_i^2)\)</span> is related to <span class="math inline">\(x_i\)</span></p>
 <p>Also recall that the linear regression model implies that</p>
-<p><span class="math display">\[E(y_i) = \alpha + \beta x_i\]</span> Thus, if we <em>knew</em> <span class="math inline">\(\varepsilon_i\)</span>, we could test for heteroskedasticity by regression <span class="math inline">\(\varepsilon_i^2\)</span> on <span class="math inline">\(x_i\)</span>, since this would tell us how <span class="math inline">\(\sigma_i^2 = E(\varepsilon_i^2)\)</span> is related to <span class="math inline">\(x_i\)</span></p>
-<p>Although we don’t have data on <span class="math inline">\(\varepsilon_i\)</span>, we know that we can use <span class="math inline">\(e_i\)</span> as it’s “stand in”</p>
+<p><span class="math display">\[E(y_i) = \alpha + \beta x_i\]</span> Thus, if we <em>knew</em> <span class="math inline">\(\varepsilon_i\)</span>, we could test for heteroskedasticity by regressing <span class="math inline">\(\varepsilon_i^2\)</span> on <span class="math inline">\(x_i\)</span>, since this would tell us how <span class="math inline">\(\sigma_i^2 = E(\varepsilon_i^2)\)</span> is related to <span class="math inline">\(x_i\)</span></p>
+<p>Although we don’t have data on <span class="math inline">\(\varepsilon_i\)</span>, we know that we can use <span class="math inline">\(e_i\)</span> as its “stand in”</p>
 </section>
 <section class="slide level2">
 
@@ -1505,7 +1505,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <section class="slide level2">
 
 <p>Technically, the test statistic is <span class="math inline">\(n R^2\)</span>, which has a <span class="math inline">\(\chi^2\)</span> (“chi square”) distribution with 2 degrees of freedom. So we reject the null if <span class="math inline">\(n R^2\)</span> is bigger than the <span class="math inline">\(\chi^2_{\alpha}(2)\)</span> critical value, which we can look up <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm">online</a> (or we can get R to tell us, see below)</p>
-<p>Alternatively, we can use an F-test of the joint null hypothesis that the coefficient on <span class="math inline">\(x\)</span> and <span class="math inline">\(x^2\)</span> are zero</p>
+<p>Alternatively, we can use an F-test of the joint null hypothesis that the coefficients on <span class="math inline">\(x\)</span> and <span class="math inline">\(x^2\)</span> are zero</p>
 </section>
 <section class="slide level2">
 
@@ -1560,7 +1560,7 @@ P-value: 0</code></pre>
 
 <p>As another example, consider the familiar model</p>
 <p><span class="math display">\[wage_i = \alpha + \beta educ_i + \varepsilon_i\]</span></p>
-<p>Here, <span class="math inline">\(\varepsilon_i\)</span> represents all of the factors <em>besides</em> education that affects the wage</p>
+<p>Here, <span class="math inline">\(\varepsilon_i\)</span> represents all of the factors <em>besides</em> education that affect the wage</p>
 <p>Since individuals living in the same state may face similar local economic conditions (another factor affecting wages), their errors might be correlated</p>
 <p>This form of autocorrelation is known as <strong>clustering</strong></p>
 </section>

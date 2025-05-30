@@ -20,7 +20,7 @@ It is unbiased: $E(b)=\beta$
 
 It is consistent: $b \underset{n \to \infty}{\to} \beta$
 
-But it still only an estimate
+But it's still only an estimate
 
 We want a better idea of what we can say about $\beta$ given our estimate $b$
 
@@ -137,7 +137,7 @@ We know that $b$ is normally distributed
 
 Since $b$ is unbiased, under the null, the mean of $b$ is 0
 
-Let's also take $b$ and *standardize it* by diving by the standard deviation of $b$
+Let's also take $b$ and *standardize it* by dividing by the standard deviation of $b$
 
 This makes it so that the normalized quantity $b/sd(b)$ has a *standard normal* distribution (a mean of 0 and a variance of 1)
 
@@ -347,7 +347,7 @@ $$t = \frac{33.5-30}{2.1} = \frac{3.5}{2.1} \approx 1.66$$
 
 Since $|1.66| < 1.96$, we *fail to reject* this null hypothesis
 
-We can easily reject the null that there is no effect, but we can't reject the null of an effect 30
+We can easily reject the null that there is no effect, but we can't reject the null of an effect of 30
 
 ---
 

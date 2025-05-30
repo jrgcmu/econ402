@@ -41,7 +41,7 @@ Since the mean of $\varepsilon$ is zero regardless of the values of the $x$'s, t
 
 It also implies that the *unconditional* mean of $\varepsilon$ is zero (i.e., if we took the expected value of $\varepsilon$ without holding the $x$'s constant)
 
-As we'll see, this is they key assumption that allows us to interpret $\beta$ as the **causal effect** of $x$ on $y$
+As we'll see, this is they key assumption that allows us to interpret $b$ as an estimate of the **causal effect** $\beta$ of $x$
 
 ------------------------------------------------------------------------
 
