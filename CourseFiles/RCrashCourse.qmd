@@ -1,0 +1,423 @@
+---
+title: |
+  | A crash course in R 
+  | (and gretl)
+format: 
+  revealjs:
+    embed-resources: true
+execute:
+  echo: true
+---
+
+```{r setup, include=FALSE}
+knitr::knit_hooks$set(purl = knitr::hook_purl)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Getting started
+
+There are a lot of different ways to work with R. Here, we are going to focus on a few key things that will be helpful for your homeworks and emprical project
+
+You can learn more about any R command by typing `help(commandname)`. Sometimes these help files can be pretty complicated, don't be afraid to consult me, the internet, or the resources below if you get stuck
+
+For more detailed introductions to R's built-in capabilities, see [An introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf) and [FasteR: The fast lane to learning R](https://github.com/matloff/fasteR)
+
+For more on the Tidyverse packages (and a few other things), see [R for Data Science](https://r4ds.hadley.nz)
+
+---
+
+You can download R from the [R project website](https://www.r-project.org) (Click on `Download > CRAN`, choose a nearby mirror, and choose the version for your operating system)
+
+RStudio is a program that makes it easier to work in R.  RStudio is free for non-commerical use, and can be downloaded from the [Posit](https://posit.co/products/open-source/rstudio/?sid=1) website
+
+## Basics
+
+R can do simple calculations, like
+
+```{r}
+2 + 2
+```
+
+You can store an object in the "workspace" using "`<-`" (the "assignment operator"):
+
+```{r}
+a <- 5
+a 
+a*2
+a^2
+```
+
+---
+
+It's more common to work with **vectors**, which are lists of numbers or characters
+
+You can create them using `c()` (the "concatenate operator"):
+
+```{r}
+b <- c(1, 5, 10)
+c <- c("Hello", ",", "how", "are", "you", "?")
+b
+b/5
+c
+```
+
+(Note that on the left, "c" is the name of the vector, while on the right it is a function. This is ok)
+
+---
+
+## Saving your work
+
+You can save your workspace using
+
+```{r, eval=FALSE}
+setwd("~/Desktop")
+save.image("MyRFile.RData")
+```
+
+And you can open an existing one using
+
+```{r, eval=FALSE}
+setwd("~/Desktop")
+load("MyRFile.RData")
+```
+
+`setwd` stands for "set working directory." You need to customize this to the location of your file
+
+You can also do all of this from the `Session` menu in RStudio
+
+---
+
+## Packages
+
+Packages are external commands that extend R's capabilities
+
+You can install them using
+
+```{r, eval=FALSE}
+install.packages("packagename")
+```
+
+and load them (so that R can use them) using
+
+```{r, eval=FALSE}
+library(packagename)
+```
+
+Note that you use quotes in the first case but not the second
+
+## Reading data
+
+R can open lots of different kinds of data. We'll focus on CSV (comma separated value) and Excel, since these are two of the most common formats
+
+Both of these come with the Tidyverse set of packages
+
+Our dataset contains information on state-level murder rates
+
+We can import the CSV file using
+
+```{r}
+library(tidyverse)
+murder <- read_csv("murder.csv")
+```
+
+This saves the data as a **dataframe**, which is basically just a list of vectors (the variables in the dataset, similar to a spreadsheet)
+
+---
+
+If the data are saved in Excel format, we can import then using
+
+```{r}
+library(readxl)
+murder <- read_excel("murder.xlsx", sheet="Sheet1")
+```
+
+---
+
+Once we've imported the dataset, we can take a quick look at it using 
+
+```{r}
+head(murder)
+```
+
+---
+
+You can view the entire dataset in RStudio by typing `View(murder)`
+
+You can also get a list of all of the variables using `str` (which stands for "structure"):
+
+```{r}
+str(murder)
+```
+
+## Visualizing data
+
+For more complex graphs, I recommend using the `ggplot2` package, which is part of the Tidyverse 
+
+We can look at the distribution of murder rates using:
+
+```{r}
+ggplot(murder, aes(x = mrdrte)) + geom_histogram()
+```
+
+---
+
+`aes(x = mrdrte)` (the "aesthetic") tells R which variable(s) we're graphing
+
+`geom_histogram` (the "geometric object") tells R what kind of graph we want
+
+---
+
+We could look at the relationship between murder rates and executions using:
+
+```{r}
+ggplot(murder, aes(x = exec, y = mrdrte)) + geom_point()
+```
+---
+
+We can use additional "geoms" to add more to the graph. For example, to add a regression line, we can use:
+
+```{r}
+ggplot(murder, aes(x = exec, y = mrdrte)) + 
+  geom_point() + geom_smooth(method="lm")
+```
+
+---
+If we wanted a different graph for each year, we could add `facet_wrap` (the `scales = "free"` option tells R to use different axes for each year):
+
+```{r}
+ggplot(murder, aes(x = exec, y = mrdrte)) + 
+  geom_point() + geom_smooth(method="lm") +
+  facet_wrap(~ year, scales="free")
+```
+
+
+## Summarizing data
+
+You can obtain very simple summary statistics using `summary`:
+
+```{r}
+summary(murder)
+```
+
+---
+
+Another way to get quick summary statistics is using the `describe` function from the `psych` package (the `::` notation is a way to use a package without loading it):
+
+```{r}
+psych::describe(murder)
+```
+
+---
+
+You can get customized summaries using the Tidyverse packages
+
+To get the mean and standard deviation of the murder rate as well as the number of observations, we can use
+
+```{r}
+murder |> summarize(mean_mrdrte = mean(mrdrte), 
+                    sd_mrdrte = sd(mrdrte),
+                    mean_exec = mean(exec),
+                    sd_exec = sd(exec),
+                    n = n()) 
+```
+
+"`|>`" is the **pipe** operator, which tells R which dataframe we're working with (so we don't need the `$` syntax)
+
+---
+
+If we only wanted to do this for a certain year, we could combine this with `filter`:
+
+```{r}
+murder |> filter(year==87) |>
+  summarize(mean_mrdrte = mean(mrdrte), 
+            sd_mrdrte = sd(mrdrte),
+            mean_exec = mean(exec),
+            sd_exec = sd(exec),
+            n = n()) 
+```
+
+Note that if our command spans lines, we have to put `|>` at the end of the line
+
+---
+
+We we wanted to know these statistics for each year, we could use `group_by`:
+
+```{r}
+murder |> group_by(year) |>
+ summarize(mean_mrdrte = mean(mrdrte), 
+           sd_mrdrte = sd(mrdrte),
+           mean_exec = mean(exec),
+           sd_exec = sd(exec),
+           n = n())  
+```
+
+
+
+## Transforming data
+
+You can add a new variable to a dataframe using
+
+```{r}
+murder$unem_sq <- murder$unem^2
+```
+
+The `$` tells R that the variable is part of the dataframe `murder`
+
+---
+
+If you are going to make a lot of new variables, it can be easier to use `mutate` from the Tidyverse packages:
+
+```{r}
+murder <- murder |> mutate(unem_sq = unem^2,
+                           exec_sq = exec^2,
+                           year90 = (year==90),
+                           year93 = (year==93))
+```
+
+The `|>` syntax is the **pipe operator**, which tells R which dataframe. you are working in
+
+The `(year==90)` syntax is the **indicator function** that equals one if the condition in parentheses is true and zero otherwise
+
+Note that we use double equals signs whenever evaluating whether a condition is true
+
+---
+
+We could change the values of the year variables using:
+
+```{r}
+murder <- murder |> mutate(year = case_when(year == 87 ~ 1987, 
+                                            year == 90 ~ 1990,
+                                            year == 93 ~ 1993))
+murder |> head()
+```
+
+
+## Merging data
+
+Suppose that you were working with the `murder` data, but wanted to add state$\times$year-level variables from another source? How could you merge these two sources?
+
+First, let me create a fake dataset to merge in:
+
+```{r}
+fake <- murder |> select(state, year) |> mutate(newvar = rnorm(n()))
+```
+
+`rnorm(n())` creates a normally distributed variable with the same number of observations as our dataset
+
+---
+
+Now we can merge these data using `left_join`:
+
+```{r}
+murder <- murder |> left_join(fake, join_by(state, year))
+murder |> select(state, year, mrdrte, newvar) |> head()
+```
+
+This is called a "left join" because it always keeps the original data, even if it doesn't get matched to the new dataset (there are other types of joins that R can do, but this is the most common)
+
+## More
+
+We will see examples of other techniques as the course progresses
+
+For example, if we want to "run a regression" of murder rates on execution rates, we can use the "linear model" function `lm' (we'll learn what this means later):
+
+```{r}
+model <- lm(mrdrte ~ exec, murder)
+```
+
+---
+
+This saves the result under `model`. To view the results, we can use
+
+```{r}
+summary(model)
+```
+
+
+## Quarto
+
+Quarto allows you to write documents and presentions using R and RStudio
+
+I used Quarto to make these slides. You can use it for your homeworks and empirical presentation (if you want, you don't have to)
+
+To create a Quarto presentation, select `File > New File > Quarto Document`
+
+To create a presentation, select `Quarto Presentation` instead
+
+You can click `Render` to turn your file into an HTML, PDF, Word or PowerPoint file
+
+---
+
+The basic syntax looks like this:
+
+````
+
+# Header
+
+Some text, *some italic text*, **some bold text**
+
+* Bulleted
+* List
+
+```{{r}}
+R commands here
+```
+
+---
+
+This is a new slide...
+
+````
+
+---
+
+If you prefer, it's perfectly fine to work in Word, Powerpoint, Google Docs, etc. instead
+
+If you do, when you are pasting R output into your file, please use a monospaced font (Courier New, Consalas, etc.) so that everything lines up correctly
+
+## gretl basics
+
+If you hate the idea of coding in R (understandable), gretl allows you to do much (but not all) of the same things using a graphical interface
+
+Gretl is free software that works on all major platforms
+
+You can download it from the [gretl website](https://gretl.sourceforge.net)
+
+---
+
+You can import data using `File > Open Data > User File`, then selecting the file type (csv, Excel, ...). Gretl might ask you some questions about the format of the data after you do this
+
+Note: You can use `File > Open Data > Sample File` to see some sample datasets that might be helpful for your empirical projects
+
+You can get basic descriptive statistics by clicking on `View > Summary statistics`
+
+gretl *can* do more advanced summary statistics, but it requires coding that isn't any easier than in R
+
+---
+
+You can plot a histogram by going to `Variable > Frequency distribution`
+
+You can make a scatter plot by selecting `View > Graph specified vars > X-Y scatter`
+
+You can add transformations of variables using the `Add` menu (the `Define new variable` option lets you use arbitrary expressions, like `z = mrdrte + exec` for the sum of the murder and execution rates)
+
+---
+
+You can run a regression by going to `Model > Ordinary Least Squares`, selecting the dependent and independent variables, and clicking `ok`
+
+You can paste the output into Word, PowerPoint, etc.
+
+From the output window, you can also do things like modify the model, run additional tests (that we will discuss later in the semester) or plot the predictions from the model
+
+You can go to `File > Save to session as icon` to save the results for future reference 
+
+You can save your entire gretl session by going to `File > Session files > Save session`
+
+---
+
+Here is what a gretl session looks like:
+
+![](gretl_screenshot.png)
+
+
