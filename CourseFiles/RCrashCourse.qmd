@@ -35,7 +35,7 @@ RStudio is a program that makes it easier to work in R.  RStudio is free for non
 
 You can interact with R by typing commands directly into R's "console window," but this isn't recommended
 
-Instead, you should create an **R Script** (a file that ends with .R) in RStudio, that contains a list of commands that you want to run. This will give you a reproducible record of everything you did
+Instead, you should create an **R Script** (a file that ends with .R) in RStudio (`File > New file > R script`), that contains a list of commands that you want to run. This will give you a reproducible record of everything you did
 
 After you've typed a command, you can run it by hitting Command + Enter (on macOS), or by highlighting it, then clicking on `run` (clicking `run` without highlighting anything will run the whole file)
 
@@ -74,28 +74,6 @@ c
 
 ---
 
-## Saving your work
-
-You can save your workspace using
-
-```{r, eval=FALSE}
-setwd("~/Desktop")
-save.image("MyRFile.RData")
-```
-
-And you can open an existing one using
-
-```{r, eval=FALSE}
-setwd("~/Desktop")
-load("MyRFile.RData")
-```
-
-`setwd` stands for "set working directory." You need to customize this to the location of your file
-
-You can also do all of this from the `Session` menu in RStudio
-
----
-
 ## Packages
 
 Packages are external commands that extend R's capabilities
@@ -122,6 +100,16 @@ Both of these come with the Tidyverse set of packages
 
 Our dataset contains information on state-level murder rates
 
+Before we do anything, we need to change the directory to the location of our file. For example, if it's saved on the Desktop, we can use
+
+```{r, eval=FALSE}
+setwd("~/Desktop")
+```
+
+`setwd` stands for "set working directory"
+
+---
+
 We can import the CSV file using
 
 ```{r}
@@ -130,8 +118,6 @@ murder <- read_csv("murder.csv")
 ```
 
 This saves the data as a **dataframe**, which is basically just a list of vectors (the variables in the dataset, similar to a spreadsheet)
-
----
 
 If the data are saved in Excel format, we can import then using
 
