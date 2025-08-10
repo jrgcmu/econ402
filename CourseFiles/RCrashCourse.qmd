@@ -31,6 +31,14 @@ You can download R from the [R project website](https://www.r-project.org) (Clic
 
 RStudio is a program that makes it easier to work in R.  RStudio is free for non-commerical use, and can be downloaded from the [Posit](https://posit.co/products/open-source/rstudio/?sid=1) website
 
+## Interacting with R
+
+You can interact with R by typing commands directly into R's "console window," but this isn't recommended
+
+Instead, you should create an **R Script** (a file that ends with .R) in RStudio, that contains a list of commands that you want to run. This will give you a reproducible record of everything you did
+
+After you've typed a command, you can run it by hitting Command + Enter (on macOS), or by highlighting it, then clicking on `run` (clicking `run` without highlighting anything will run the whole file)
+
 ## Basics
 
 R can do simple calculations, like
