@@ -141,7 +141,11 @@ $$ (-2) \sum_{i=1}^n (y_i - b x_i)x_i = 0$$
 ------------------------------------------------------------------------
 
 We can divide both sides by $-2$ to get 
-$$\sum_{i=1}^n (y_i - b x_i)x_i = 0$$ We can rewrite this as $$\sum_i y_i x_i + b \sum_i x_i^2 = 0$$ 
+$$\sum_{i=1}^n (y_i - b x_i)x_i = 0$$ 
+
+We can rewrite this as 
+
+$$\sum_i y_i x_i - b \sum_i x_i^2 = 0$$ 
 
 Solving for $b$: 
 $$b = \frac{\sum_{i=1}^n y_i x_i}{\sum_{i=1}^n x_i^2}$$
