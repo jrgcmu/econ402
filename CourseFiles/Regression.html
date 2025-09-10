@@ -1138,9 +1138,19 @@ margin-right: 0; }
 
 <p>Finding the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> that minimize the sum of squared residuals is a standard calculus problem</p>
 <p>To solve it, we’ll make a simplification: Assume that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are in <em>deviations-from-means</em> form (i.e., instead of <span class="math inline">\(y\)</span> we have <span class="math inline">\(y-\bar y\)</span>, and similarly for <span class="math inline">\(x\)</span>)</p>
-<p>Now, our model implies that the population mean of <span class="math inline">\(y\)</span> is <span class="math display">\[E(y) = \alpha + \beta E(x)\]</span></p>
-<p>However, if <span class="math inline">\(y\)</span> is in deviation-from-mean form, its mean has to be zero (since for a random sample the average of <span class="math inline">\(y_i - \bar{y}\)</span> is <span class="math inline">\(E(y)-E(\bar{y})=0\)</span>), and similarly for <span class="math inline">\(x\)</span>)</p>
-<p>In this case, we can drop the constant <span class="math inline">\(\alpha\)</span>, so the model is just <span class="math inline">\(y_i = \beta x_i + \varepsilon_i\)</span></p>
+<p>Our model implies that the population mean of <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[\bar y = \alpha + \beta \bar x + \bar \varepsilon\]</span> So</p>
+<p><span class="math display">\[
+\begin{aligned} y_i - \bar y &amp;= (\alpha + \beta x_i + \varepsilon_i) - (\alpha + \beta \bar x + \bar \varepsilon) \\
+&amp; = \beta (x_i - \bar x) + (\varepsilon_i - \bar \varepsilon)
+\end{aligned}
+\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Therefore, if <span class="math inline">\(y\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(\varepsilon\)</span> are <em>already</em> in deviations-from-mean form, we can drop the constant term and write the model as</p>
+<p><span class="math display">\[y_i = \beta x_i + \varepsilon_i\]</span></p>
+<p>(Technically, we should use different notation for the original variables and their deviations from means. Here, we are implicitly saying that <span class="math inline">\(y_i\)</span> really represents <span class="math inline">\(y_i - \bar y\)</span>)</p>
 </section>
 <section class="slide level2">
 
@@ -1161,13 +1171,28 @@ margin-right: 0; }
 </section>
 <section class="slide level2">
 
+<p>A technical aside: To make sure we’ve found the minimum of the SSR, we also need to make sure that its <em>second</em> derivative is <em>positive</em></p>
+<p>Since the first derivative is <span class="math inline">\((-2) \sum_{i=1}^n (y_i - b x_i)x_i\)</span>, the second derivative is</p>
+<p><span class="math display">\[2 \sum_i x_i^2 &gt; 0,\]</span></p>
+<p>so it’s all good</p>
+</section>
+<section class="slide level2">
+
 <p>What happens if <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are not in deviations-from-means form?</p>
 <p>We can simply replace them with deviations from means:</p>
 <p><span class="math display">\[b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar x)^2}\]</span></p>
-<p>To find the constant term, recall that <span class="math inline">\(E(y) = \alpha + \beta E(x)\)</span></p>
-<p>Thus, we can estimate <span class="math inline">\(\alpha\)</span> as</p>
+<p>To find the constant term, note that in deviations form, <span class="math inline">\(e_i = y_i - b x_i\)</span>, or <span class="math inline">\(y_i = b x_i + e_i\)</span></p>
+<p>Expanding into non deviations form, we have</p>
+<p><span class="math display">\[y_i - \bar y = b(x_i - \bar x)  + e_i\]</span></p>
+<p>(<span class="math inline">\(e\)</span> is already in deviations form since <span class="math inline">\(\bar e = 0\)</span>)</p>
+</section>
+<section class="slide level2">
+
+<p>Rearranging, this becomes</p>
+<p><span class="math display">\[y_i = (\bar y - b \bar x) + b x_i + e_i\]</span></p>
+<p>Thus, the constant term, and our estimate of <span class="math inline">\(\alpha\)</span> is</p>
 <p><span class="math display">\[a = \bar{y} - b \bar {x}\]</span></p>
-<p>These are the <strong>Ordinary Least Squares (OLS)</strong> estimates of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></p>
+<p><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the <strong>Ordinary Least Squares (OLS)</strong> estimates of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></p>
 </section>
 <section id="properties-of-the-residuals" class="slide level2">
 <h2>Properties of the residuals</h2>

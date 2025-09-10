@@ -99,14 +99,26 @@ Finding the values of $a$ and $b$ that minimize the sum of squared residuals is 
 
 To solve it, we'll make a simplification: Assume that $y$ and $x$ are in *deviations-from-means* form (i.e., instead of $y$ we have $y-\bar y$, and similarly for $x$)
 
-Now, our model implies that the population mean of $y$ is 
-$$E(y) = \alpha + \beta E(x)$$
+Our model implies that the population mean of $y$ is 
 
-However, if $y$ is in deviation-from-mean form, its mean has to be zero (since for a random sample the average of $y_i - \bar{y}$ is $E(y)-E(\bar{y})=0$), and similarly for $x$)
+$$\bar y = \alpha + \beta \bar x + \bar \varepsilon$$
+So
 
-In this case, we can drop the constant $\alpha$, so the model is just $y_i = \beta x_i + \varepsilon_i$
+$$
+\begin{aligned} y_i - \bar y &= (\alpha + \beta x_i + \varepsilon_i) - (\alpha + \beta \bar x + \bar \varepsilon) \\
+& = \beta (x_i - \bar x) + (\varepsilon_i - \bar \varepsilon)
+\end{aligned}
+$$
 
-------------------------------------------------------------------------
+---
+
+Therefore, if $y$, $x$ and $\varepsilon$ are *already* in deviations-from-mean form, we can drop the constant term and write the model as
+
+$$y_i = \beta x_i + \varepsilon_i$$
+
+(Technically, we should use different notation for the original variables and their deviations from means. Here, we are implicitly saying that $y_i$ really represents $y_i - \bar y$)
+
+---
 
 Now we only need to find the value of $b$ that minimizes 
 $$\sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - b x_i)^2$$
@@ -134,7 +146,17 @@ $$\sum_{i=1}^n (y_i - b x_i)x_i = 0$$ We can rewrite this as $$\sum_i y_i x_i + 
 Solving for $b$: 
 $$b = \frac{\sum_{i=1}^n y_i x_i}{\sum_{i=1}^n x_i^2}$$
 
-------------------------------------------------------------------------
+---
+
+A technical aside: To make sure we've found the minimum of the SSR, we also need to make sure that its *second* derivative is *positive*
+
+Since the first derivative is $(-2) \sum_{i=1}^n (y_i - b x_i)x_i$, the second derivative is
+
+$$2 \sum_i x_i^2 > 0,$$
+
+so it's all good
+
+---
 
 What happens if $y$ and $x$ are not in deviations-from-means form?
 
@@ -142,13 +164,26 @@ We can simply replace them with deviations from means:
 
 $$b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar x)^2}$$
 
-To find the constant term, recall that $E(y) = \alpha + \beta E(x)$
+To find the constant term, note that in deviations form, $e_i = y_i - b x_i$, or $y_i = b x_i + e_i$
 
-Thus, we can estimate $\alpha$ as
+Expanding into non deviations form, we have
+
+$$y_i - \bar y = b(x_i - \bar x)  + e_i$$
+
+($e$ is already in deviations form since $\bar e = 0$)
+
+---
+
+Rearranging, this becomes
+
+$$y_i = (\bar y - b \bar x) + b x_i + e_i$$
+
+Thus, the constant term, and our estimate of $\alpha$ is
 
 $$a = \bar{y} - b \bar {x}$$
 
-These are the **Ordinary Least Squares (OLS)** estimates of $\alpha$ and $\beta$
+$a$ and $b$ are the **Ordinary Least Squares (OLS)** estimates of $\alpha$ and $\beta$
+
 
 ## Properties of the residuals
 
