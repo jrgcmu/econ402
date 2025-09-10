@@ -8,9 +8,9 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 * A crash course in R (and gretl): [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/RCrashCourse.html), [R script](https://raw.githubusercontent.com/jrgcmu/econ402/refs/heads/main/CourseFiles/RCrashCourse_Script.R)
 
-* Background: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html)
+* Background: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html)
 
-* Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.html)
+* Regression, part I: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.html)
 
 * Regression, part II: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.html)
 
