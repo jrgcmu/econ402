@@ -10,7 +10,7 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 * Background: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Background.html)
 
-* Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Regression.html)
+* Regression, part I: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression.html)
 
 * Regression, part II: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.html)
 
