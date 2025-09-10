@@ -1182,15 +1182,14 @@ margin-right: 0; }
 <p>We can simply replace them with deviations from means:</p>
 <p><span class="math display">\[b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar x)^2}\]</span></p>
 <p>To find the constant term, note that in deviations form, <span class="math inline">\(e_i = y_i - b x_i\)</span>, or <span class="math inline">\(y_i = b x_i + e_i\)</span></p>
-<p>Expanding into non deviations form, we have</p>
+<p>Expanding <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> back into their original forms, we have</p>
 <p><span class="math display">\[y_i - \bar y = b(x_i - \bar x)  + e_i\]</span></p>
-<p>(<span class="math inline">\(e\)</span> is already in deviations form since <span class="math inline">\(\bar e = 0\)</span>)</p>
 </section>
 <section class="slide level2">
 
 <p>Rearranging, this becomes</p>
 <p><span class="math display">\[y_i = (\bar y - b \bar x) + b x_i + e_i\]</span></p>
-<p>Thus, the constant term, and our estimate of <span class="math inline">\(\alpha\)</span> is</p>
+<p>Thus, the constant term, and our estimate of <span class="math inline">\(\alpha\)</span>, is</p>
 <p><span class="math display">\[a = \bar{y} - b \bar {x}\]</span></p>
 <p><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the <strong>Ordinary Least Squares (OLS)</strong> estimates of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></p>
 </section>

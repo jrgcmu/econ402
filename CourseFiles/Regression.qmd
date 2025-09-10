@@ -166,11 +166,9 @@ $$b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar 
 
 To find the constant term, note that in deviations form, $e_i = y_i - b x_i$, or $y_i = b x_i + e_i$
 
-Expanding into non deviations form, we have
+Expanding $y$ and $x$ back into their original forms, we have
 
 $$y_i - \bar y = b(x_i - \bar x)  + e_i$$
-
-($e$ is already in deviations form since $\bar e = 0$)
 
 ---
 
@@ -178,7 +176,7 @@ Rearranging, this becomes
 
 $$y_i = (\bar y - b \bar x) + b x_i + e_i$$
 
-Thus, the constant term, and our estimate of $\alpha$ is
+Thus, the constant term, and our estimate of $\alpha$, is
 
 $$a = \bar{y} - b \bar {x}$$
 
