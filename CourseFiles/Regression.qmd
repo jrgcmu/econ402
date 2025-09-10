@@ -156,7 +156,7 @@ Let's quickly discuss two properties of the OLS residuals
 
 **Property 1.** $\bar{e}=0$
 
-Why? We know that (writing the variabls as deviations from means):
+Why? We know that (writing the variables as deviations from means):
 
 $$e_i = (y_i - \bar y) - b (x_i - \bar x),$$
 

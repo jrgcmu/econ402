@@ -1139,7 +1139,7 @@ margin-right: 0; }
 <p>Finding the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> that minimize the sum of squared residuals is a standard calculus problem</p>
 <p>To solve it, we’ll make a simplification: Assume that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are in <em>deviations-from-means</em> form (i.e., instead of <span class="math inline">\(y\)</span> we have <span class="math inline">\(y-\bar y\)</span>, and similarly for <span class="math inline">\(x\)</span>)</p>
 <p>Now, our model implies that the population mean of <span class="math inline">\(y\)</span> is <span class="math display">\[E(y) = \alpha + \beta E(x)\]</span></p>
-<p>However, if <span class="math inline">\(y\)</span> is in deviation-from-mean form, its mean has to be zero (since for a random sample the average of <span class="math inline">\(y_i - \bar{y}\)</span> is <span class="math inline">\(E(y)-E(\bar{y})=0\)</span>), and similarly for <span class="math inline">\(x\)</span>l</p>
+<p>However, if <span class="math inline">\(y\)</span> is in deviation-from-mean form, its mean has to be zero (since for a random sample the average of <span class="math inline">\(y_i - \bar{y}\)</span> is <span class="math inline">\(E(y)-E(\bar{y})=0\)</span>), and similarly for <span class="math inline">\(x\)</span>)</p>
 <p>In this case, we can drop the constant <span class="math inline">\(\alpha\)</span>, so the model is just <span class="math inline">\(y_i = \beta x_i + \varepsilon_i\)</span></p>
 </section>
 <section class="slide level2">
@@ -1173,7 +1173,7 @@ margin-right: 0; }
 <h2>Properties of the residuals</h2>
 <p>Let’s quickly discuss two properties of the OLS residuals</p>
 <p><strong>Property 1.</strong> <span class="math inline">\(\bar{e}=0\)</span></p>
-<p>Why? We know that (writing the variabls as deviations from means):</p>
+<p>Why? We know that (writing the variables as deviations from means):</p>
 <p><span class="math display">\[e_i = (y_i - \bar y) - b (x_i - \bar x),\]</span></p>
 <p>which implies that</p>
 <p><span class="math display">\[\bar e = (\bar y - \bar y) - b (\bar x - \bar x) = 0\]</span> Since <span class="math inline">\(\bar e = (\sum_i e_i)/n\)</span>, this also implies that the residuals sum to zero</p>
