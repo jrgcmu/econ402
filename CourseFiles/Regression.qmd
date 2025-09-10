@@ -7,10 +7,10 @@ execute:
   echo: true
 ---
 
-```{r setup, include=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
+<!-- knitr::opts_chunk$set(echo = TRUE) -->
+<!-- ``` -->
 
 
 ## Why regression?
@@ -58,7 +58,7 @@ The "hat" indicates that our line will give us a **prediction** of $y_i$ and not
 ------------------------------------------------------------------------
 
 If we have estimates $a$ and $b$, the **residual** for our estimated line is the difference between the true value of $y_i$ and our prediction $\widehat{y}_i$: 
-$$e_i = y - \widehat{y}_i$$
+$$e_i = y_i - \widehat{y}_i$$
 
 In general, we want our residuals to be as small as possible
 
@@ -85,7 +85,8 @@ The problem is that large *negative* residuals cancel out with large *positive* 
 
 Instead, we will try to minimize the sum of *squared* residuals
 
-We will choose our estimates $a$ and $b$ to be the values that minimize $$
+We will choose our estimates $a$ and $b$ to be the values that minimize 
+$$
 \begin{aligned}
 \sum_{i=1}^n e_i^2 &= \sum_{i=1}^n (y_i - \widehat{y}_i)^2 \\
 &= \sum_{i=1}^n (y_i - a - b x_i)^2
@@ -98,12 +99,12 @@ Finding the values of $a$ and $b$ that minimize the sum of squared residuals is 
 
 To solve it, we'll make a simplification: Assume that $y$ and $x$ are in *deviations-from-means* form (i.e., instead of $y$ we have $y-\bar y$, and similarly for $x$)
 
-Now, our model implies that the average of $y$ is 
-$$\bar{y} = \alpha + \beta \bar{x}$$
+Now, our model implies that the population mean of $y$ is 
+$$E(y) = \alpha + \beta E(x)$$
 
-However, if $y$ is in deviation-from-mean form, the mean has to be zero (since the average of $y_i - \bar{y}$ is $\bar{y}-\bar{y}=0$)
+However, if $y$ is in deviation-from-mean form, its mean has to be zero (since for a random sample the average of $y_i - \bar{y}$ is $E(y)-E(\bar{y})=0$), and similarly for $x$)
 
-In this case, we can drop the constant $a$, so the model is just $y_i = \beta x_i$
+In this case, we can drop the constant $\alpha$, so the model is just $y_i = \beta x_i + \varepsilon_i$
 
 ------------------------------------------------------------------------
 
@@ -141,8 +142,11 @@ We can simply replace them with deviations from means:
 
 $$b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar x)^2}$$
 
-Also, since we know that $\bar y = \alpha + \beta \bar x$, we can estimate $\alpha$ as 
-$$a = \bar{y} - b \bar x$$ 
+To find the constant term, recall that $E(y) = \alpha + \beta E(x)$
+
+Thus, we can estimate $\alpha$ as
+
+$$a = \bar{y} - b \bar {x}$$
 
 These are the **Ordinary Least Squares (OLS)** estimates of $\alpha$ and $\beta$
 
@@ -152,11 +156,14 @@ Let's quickly discuss two properties of the OLS residuals
 
 **Property 1.** $\bar{e}=0$
 
-Why? We know that 
-$$e_i = y_i - \widehat{y}_i = y_i - a - b x_i$$ 
-which implies that 
-$$\bar{e} = \bar{y} - a - b \bar{x} = 0$$ 
-since $\bar{y}=a + b \bar{x}$. Since $\bar e = (\sum_i e_i)/n$, this also implies that the residuals sum to zero
+Why? We know that (writing the variabls as deviations from means):
+
+$$e_i = (y_i - \bar y) - b (x_i - \bar x),$$
+
+which implies that
+
+$$\bar e = (\bar y - \bar y) - b (\bar x - \bar x) = 0$$
+Since $\bar e = (\sum_i e_i)/n$, this also implies that the residuals sum to zero
 
 ------------------------------------------------------------------------
 
@@ -276,8 +283,13 @@ When we run a regression, we might be interested in knowing how good a job the r
 ------------------------------------------------------------------------
 
 It turns out (it's not hard to prove, but we'll skip it in the interest of time) that 
-$$\sum_i (y_i - \bar y) = b^2 \sum_i (x - \bar x)^2 + \sum_i e_i^2$$ 
-In other words, the total variation in $y$ can be decomposed into the part that is explained by the regression and the unexplained part
+$$\sum_i (y_i - \bar y) = b^2 \sum_i (x_i - \bar x)^2 + \sum_i e_i^2$$ 
+
+
+Rearranging, we can divide the total variation in $y$ into the part that is explained by the regression and the unexplained part:
+
+$$1 = \frac{b^2 \sum_i (x_i - \bar x)^2}{\sum_i (y_i - \bar y)^2} + 
+\frac{\sum_i e_i^2}{\sum_i (y_i - \bar y)^2}$$
 
 ------------------------------------------------------------------------
 
@@ -287,7 +299,7 @@ $$R^2 = \frac{b^2 \sum_i (x_i - \bar x)^2}{\sum_i (y_i - \bar y)^2}
 
 We usually use whichever form is easiest to work with
 
-This gives us a sense of how good a job our regression does of "explaining" $y$
+This gives us a sense of how good a job our regression does of "explaining" $y$ (how much better we do than if we just predicted $y$ using $\bar y$)
 
 Don't put too much emphasis on it. We're usually interested in knowing whether $x$ affects $y$, and this can be true even if $x$ only explains a small fraction of the variation in $y$
 

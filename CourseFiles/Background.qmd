@@ -7,10 +7,10 @@ execute:
   echo: true
 ---
 
-```{r setup, include=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
+<!-- knitr::opts_chunk$set(echo = TRUE) -->
+<!-- ``` -->
 
 ## Sums and averages
 
@@ -40,9 +40,23 @@ $$\sum_i x_i y_i \ne y_i \sum_i x_i$$
 
 ---
 
+We can split a "sum of sums" into two sums:
+
+$$\sum_i (x_i + y_i) = \sum_i x_i + \sum_i y_i$$
+
 The **average** of $x_1, x_2, \dots, x_m$ is
 
 $$\bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} = \frac{\sum_i x_i}{n}$$
+
+---
+
+Also note that
+
+$$\sum_i (x_i - \bar x) = n \bar x - n \bar x = 0$$
+
+(using the definition of $\bar x$)
+
+Intuitively, the average difference from the average has to be zero
 
 ## Random variables and samples
 
