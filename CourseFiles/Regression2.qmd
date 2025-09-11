@@ -7,10 +7,10 @@ execute:
   echo: true
 ---
 
-```{r setup, include=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
+<!-- knitr::opts_chunk$set(echo = TRUE) -->
+<!-- ``` -->
 
 ## Introduction
 
@@ -266,9 +266,57 @@ This is often remembered by saying that OLS is *BLUE*: the Best Linear Unbiased 
 
 We care about this because the variance of our estimator tells us how far away from $\beta$ it will tend to be just because of randomness. Having the best unbiased estimator means that our estimator will tend to be as close to $\beta$ as possible
 
-The proof of this is not more difficult than the other proofs that we've seen, but since it would take a lot of time, we will skip it
+## Deriving Gauss-Markov
 
-------------------------------------------------------------------------
+Suppose $d$ is a *different* linear, unbiased estimator. Then $d$ can be written as
+
+$$
+\begin{aligned}
+d &= \left(\frac{x_1}{\sum_i x_i^2} + z_1\right) y_1 + \dots + \left(\frac{x_n}{\sum_i x_i^2} + z_n \right) y_n \\
+&= \sum_i \left( \frac{x_i}{\sum_i x_i ^2} + z_i \right) y_i \\
+&= b + \sum_i z_i y_i
+\end{aligned}
+$$
+
+---
+
+If $d$ is unbiased, then $E(d)=\beta$, or
+
+$$
+\begin{aligned}
+E\left( b + \sum_i z_i y_i \right) &= E\left( b + \sum_i z_i (\beta x_i + \varepsilon_i)  \right) \\
+&= \beta + \beta \sum_i z_i x_i + \sum_i z_i \underbrace{E(\varepsilon_i)}_{=0} \\
+&= \beta
+\end{aligned}
+$$
+
+which requires that $\sum_i z_i x_i = 0$
+
+---
+
+Now consider
+
+$$
+\begin{aligned}
+V(d) &= V\left[ \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right) y_i \right] = \sum_i V\left[\left( \frac{x_i}{\sum_i x_i^2} + z_i \right) y_i \right] \\
+&= \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right)^2 V(y_i) 
+  = \sigma^2 \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right)^2 \\
+&= \sigma^2 \left[\sum_i \left( \frac{x_i^2}{(\sum_i x_i^2)^2}   
+  + \right) + \sum_i \frac{x_i z_i}{(\sum_i x_i^2)^2} 
+  +\sum_i \frac{z_i^2}{(\sum_i x_i^2)^2}\right] \\
+&= \sigma^2 \left[ \frac{1}{\sum_i x_i^2} + 0 + \ge 0 \right]
+\end{aligned}
+$$
+
+---
+
+$V(y_i) = V(\beta x_i + \varepsilon_i) = V(\varepsilon_i)$, since we are treating the $x$s as constants
+
+The middle term is zero because unbiasedness requires that $\sum_i x_i z_i = 0$ and the second term is $\ge$ zero because it is squared
+
+This shows that
+
+$$V(d) \ge V(b)$$
 
 ## Correlation, causation and all that: A preview
 
