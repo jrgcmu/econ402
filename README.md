@@ -14,15 +14,15 @@ This is the website for *Econ 402: Econometrics* at the University of Mississipp
 
 * Regression, part II: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Regression2.html)
 
-* Inference: [slides](https://rawcdn.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Inference.html)
+* Inference: [slides](https://raw.githack.com/jrgcmu/econ402/6a27d6a8ba60aee4aaceff799b586119dd7d3896/CourseFiles/Inference.html)
 
-* Multivariate regression: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/MultiRegression.html)
+* Multivariate regression: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/MultiRegression.html)
 
-* Heteroskedasticity and autocorrelation: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/HetAuto.html)
+* Heteroskedasticity and autocorrelation: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/HetAuto.html)
 
-* Endogeneity: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.html)
+* Endogeneity: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Endog.html)
 
-* Specification: [slides](https://rawcdn.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.html)
+* Specification: [slides](https://raw.githack.com/jrgcmu/econ402/refs/heads/main/CourseFiles/Spec.html)
 
 ## Notes on the notes
 
