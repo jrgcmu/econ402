@@ -1383,9 +1383,27 @@ b &amp;= \frac{Cov(x, y)}{Var(x)} = \frac{Cov(x, y)}{sd(x)^2} \\
 </section>
 <section class="slide level2">
 
-<p>E.g.:</p>
+<p>E.g.: Let’s revisit our wage model and calculate the <span class="math inline">\(R^2\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href></a>ss.total <span class="ot">&lt;-</span> <span class="fu">sum</span>((gril<span class="sc">$</span>wage <span class="sc">-</span> <span class="fu">mean</span>(gril<span class="sc">$</span>wage))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-2"><a href></a>ss.s <span class="ot">&lt;-</span> <span class="fu">sum</span>((gril<span class="sc">$</span>s <span class="sc">-</span> <span class="fu">mean</span>(gril<span class="sc">$</span>s))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-3"><a href></a>ss.e <span class="ot">&lt;-</span> <span class="fu">sum</span>(model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-4"><a href></a><span class="dv">1</span> <span class="sc">-</span> ss.e<span class="sc">/</span>ss.total <span class="co"># version 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2530168</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href></a>model<span class="sc">$</span>coef[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> ss.s<span class="sc">/</span>ss.total <span class="co"># version 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        s 
+0.2530168 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Fortunately, R automatically reports this for us, so we don’t have to calculate it manually every time</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
