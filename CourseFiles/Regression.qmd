@@ -330,9 +330,9 @@ Also,
 $$
 \begin{aligned}
 b &= \frac{Cov(x, y)}{Var(x)} = \frac{Cov(x, y)}{sd(x)^2} \\
-  &= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(x)}{sd(y)} 
-    = \frac{Cov(x,y)}{sd(x) sd(y)} \\
-  &= Corr(x,y)
+  &= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(y)}{sd(y)} 
+    = \frac{Cov(x,y)}{sd(x) sd(y)} \cdot \frac{sd(y)}{sd(x)}\\
+  &= Corr(x,y) \cdot \frac{sd(y)}{sd(x)}
 \end{aligned}
 $$
 

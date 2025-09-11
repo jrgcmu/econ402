@@ -1336,9 +1336,9 @@ b &amp;= \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}
 <p><span class="math display">\[
 \begin{aligned}
 b &amp;= \frac{Cov(x, y)}{Var(x)} = \frac{Cov(x, y)}{sd(x)^2} \\
-  &amp;= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(x)}{sd(y)}
-    = \frac{Cov(x,y)}{sd(x) sd(y)} \\
-  &amp;= Corr(x,y)
+  &amp;= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(y)}{sd(y)}
+    = \frac{Cov(x,y)}{sd(x) sd(y)} \cdot \frac{sd(y)}{sd(x)}\\
+  &amp;= Corr(x,y) \cdot \frac{sd(y)}{sd(x)}
 \end{aligned}
 \]</span></p>
 </section>
