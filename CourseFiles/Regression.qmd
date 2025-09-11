@@ -308,6 +308,34 @@ $$\frac{\Delta \widehat{wage}_i}{\Delta s} = 33.5$$
 
 We interpret this to mean that *for every additional unit of schooling, the wage is predicted to increase by \$33.50*
 
+## Relationship to covariance and correlation
+
+The form of the OLS estimator of the slope coefficient $\beta$ that we have seen is probably the most useful
+
+However, it is also related to both the sample covariance and correlation
+
+$$
+\begin{aligned}
+b &= \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2} 
+    =  \frac{\frac{1}{n-1}\sum_i (x_i - \bar x)(y_i - \bar y)}
+       {\frac{1}{n-1}\sum_i (x_i - \bar x)^2}  \\
+  &= \frac{Cov(x, y)}{Var(x)}
+\end{aligned}
+$$
+
+---
+
+Also,
+
+$$
+\begin{aligned}
+b &= \frac{Cov(x, y)}{Var(x)} = \frac{Cov(x, y)}{sd(x)^2} \\
+  &= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(x)}{sd(y)} 
+    = \frac{Cov(x,y)}{sd(x) sd(y)} \\
+  &= Corr(x,y)
+\end{aligned}
+$$
+
 ## "Goodness of fit"
 
 The sample variance of $y$ is 
@@ -315,13 +343,37 @@ $$Var(y) = \frac{\sum_i (y_i -\bar y)}{n-1}$$
 
 We can think of the numerator of this as the "total variation" in $y$
 
-When we run a regression, we might be interested in knowing how good a job the regression does of helping us explain this variation
+When we run a regression, we are using $x$ to predict $y$
 
-------------------------------------------------------------------------
+To assess how good a job our regression does of predicting $y$, we might want to compare how much more of the variation in $y$ our regression explains than if we simply used the mean $\bar y$ as our predictor
 
-It turns out (it's not hard to prove, but we'll skip it in the interest of time) that 
-$$\sum_i (y_i - \bar y) = b^2 \sum_i (x_i - \bar x)^2 + \sum_i e_i^2$$ 
+---
 
+To do this, let's assume $y$ is already in deviation-from-mean form, and write
+
+$$y_i = (y_i - \hat{y}_i) + \hat{y_i}$$
+
+So that the total variation $\sum y^2$ in $y$ becomes
+
+$$\sum_i y_i^2 = \sum_i (y_i - \hat{y}_i)^2 + \sum_i \hat{y}_i^2 
+  + 2 \sum_i (y_i - \hat{y}_i) \hat{y}_i$$
+  
+Using residual properties, the last term is actually just (ignoring the 2)
+
+$$\sum_i e_i (b x_i) = b \sum_i e_i x_i = 0$$
+
+---
+
+So the total variation in $y$ becomes
+
+$$\sum_i y_i^2 = \sum_i (y_i - \hat{y}_i)^2 + \sum_i \hat{y}_i^2 
+= \sum_i e_i^2 + b^2 \sum_i x_i^2$$
+
+---
+
+Now, if we convert back to non-deviations form, we have
+
+$$\sum_i (y_i - \bar y)^2 = \sum_i b^2 (x_i - \bar x)^2 + \sum_i e_i^2$$
 
 Rearranging, we can divide the total variation in $y$ into the part that is explained by the regression and the unexplained part:
 

@@ -1317,15 +1317,58 @@ F-statistic: 256.1 on 1 and 756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Since <span class="math display">\[\widehat{wage}_i = -125.3 + 33.5 * school,\]</span> the effect of an increase in schooling on the predicted wage is <span class="math display">\[\frac{\Delta \widehat{wage}_i}{\Delta s} = 33.5\]</span></p>
 <p>We interpret this to mean that <em>for every additional unit of schooling, the wage is predicted to increase by $33.50</em></p>
 </section>
+<section id="relationship-to-covariance-and-correlation" class="slide level2">
+<h2>Relationship to covariance and correlation</h2>
+<p>The form of the OLS estimator of the slope coefficient <span class="math inline">\(\beta\)</span> that we have seen is probably the most useful</p>
+<p>However, it is also related to both the sample covariance and correlation</p>
+<p><span class="math display">\[
+\begin{aligned}
+b &amp;= \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}
+    =  \frac{\frac{1}{n-1}\sum_i (x_i - \bar x)(y_i - \bar y)}
+       {\frac{1}{n-1}\sum_i (x_i - \bar x)^2}  \\
+  &amp;= \frac{Cov(x, y)}{Var(x)}
+\end{aligned}
+\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Also,</p>
+<p><span class="math display">\[
+\begin{aligned}
+b &amp;= \frac{Cov(x, y)}{Var(x)} = \frac{Cov(x, y)}{sd(x)^2} \\
+  &amp;= \frac{Cov(x,y)}{sd(x)^2} \cdot \frac{sd(x)}{sd(y)}
+    = \frac{Cov(x,y)}{sd(x) sd(y)} \\
+  &amp;= Corr(x,y)
+\end{aligned}
+\]</span></p>
+</section>
 <section id="goodness-of-fit" class="slide level2">
 <h2>“Goodness of fit”</h2>
 <p>The sample variance of <span class="math inline">\(y\)</span> is <span class="math display">\[Var(y) = \frac{\sum_i (y_i -\bar y)}{n-1}\]</span></p>
 <p>We can think of the numerator of this as the “total variation” in <span class="math inline">\(y\)</span></p>
-<p>When we run a regression, we might be interested in knowing how good a job the regression does of helping us explain this variation</p>
+<p>When we run a regression, we are using <span class="math inline">\(x\)</span> to predict <span class="math inline">\(y\)</span></p>
+<p>To assess how good a job our regression does of predicting <span class="math inline">\(y\)</span>, we might want to compare how much more of the variation in <span class="math inline">\(y\)</span> our regression explains than if we simply used the mean <span class="math inline">\(\bar y\)</span> as our predictor</p>
 </section>
 <section class="slide level2">
 
-<p>It turns out (it’s not hard to prove, but we’ll skip it in the interest of time) that <span class="math display">\[\sum_i (y_i - \bar y) = b^2 \sum_i (x_i - \bar x)^2 + \sum_i e_i^2\]</span></p>
+<p>To do this, let’s assume <span class="math inline">\(y\)</span> is already in deviation-from-mean form, and write</p>
+<p><span class="math display">\[y_i = (y_i - \hat{y}_i) + \hat{y_i}\]</span></p>
+<p>So that the total variation <span class="math inline">\(\sum y^2\)</span> in <span class="math inline">\(y\)</span> becomes</p>
+<p><span class="math display">\[\sum_i y_i^2 = \sum_i (y_i - \hat{y}_i)^2 + \sum_i \hat{y}_i^2
+  + 2 \sum_i (y_i - \hat{y}_i) \hat{y}_i\]</span></p>
+<p>Using residual properties, the last term is actually just (ignoring the 2)</p>
+<p><span class="math display">\[\sum_i e_i (b x_i) = b \sum_i e_i x_i = 0\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>So the total variation in <span class="math inline">\(y\)</span> becomes</p>
+<p><span class="math display">\[\sum_i y_i^2 = \sum_i (y_i - \hat{y}_i)^2 + \sum_i \hat{y}_i^2
+= \sum_i e_i^2 + b^2 \sum_i x_i^2\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Now, if we convert back to non-deviations form, we have</p>
+<p><span class="math display">\[\sum_i (y_i - \bar y)^2 = \sum_i b^2 (x_i - \bar x)^2 + \sum_i e_i^2\]</span></p>
 <p>Rearranging, we can divide the total variation in <span class="math inline">\(y\)</span> into the part that is explained by the regression and the unexplained part:</p>
 <p><span class="math display">\[1 = \frac{b^2 \sum_i (x_i - \bar x)^2}{\sum_i (y_i - \bar y)^2} +
 \frac{\sum_i e_i^2}{\sum_i (y_i - \bar y)^2}\]</span></p>
