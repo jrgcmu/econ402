@@ -9,10 +9,10 @@ execute:
   echo: true
 ---
 
-```{r setup, include=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
+<!-- knitr::opts_chunk$set(echo = TRUE) -->
+<!-- ``` -->
 
 
 ## Getting started
@@ -92,11 +92,11 @@ library(packagename)
 
 Note that you use quotes in the first case but not the second
 
+We will frequently use the "Tidyverse" packages, which make it a little easier to work in R
+
 ## Reading data
 
 R can open lots of different kinds of data. We'll focus on CSV (comma separated value) and Excel, since these are two of the most common formats
-
-Both of these come with the Tidyverse set of packages
 
 Our dataset contains information on state-level murder rates
 
@@ -107,6 +107,17 @@ setwd("~/Desktop")
 ```
 
 `setwd` stands for "set working directory"
+
+---
+
+On windows, we would type
+
+```{r, eval=FALSE}
+setwd("C:/Users/[Your Username]/Desktop")
+```
+
+Note that we still use the forward slash ``/`` even though Windows usually uses the backslash ``\`` (you can also use ``\\``)
+
 
 ---
 
@@ -314,7 +325,7 @@ This is called a "left join" because it always keeps the original data, even if 
 
 We will see examples of other techniques as the course progresses
 
-For example, if we want to "run a regression" of murder rates on execution rates, we can use the "linear model" function `lm' (we'll learn what this means later):
+For example, if we want to "run a regression" of murder rates on execution rates, we can use the "linear model" function `lm` (we'll learn what this means later):
 
 ```{r}
 model <- lm(mrdrte ~ exec, murder)
