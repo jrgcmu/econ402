@@ -69,7 +69,7 @@ mtext("1", 1, line=1, at=1)
 ---
 
 Now, since (as we proved before, assuming deviations-from-means form),
-$$b = \beta + \frac{\sum_i x_i \varepsilon_i}{\sum x_i \varepsilon_i}$$
+$$b = \beta + \frac{\sum_i x_i \varepsilon_i}{\sum x_i^2}$$
 
 Since $\varepsilon$ is the only source of randomness, if $\varepsilon \sim N$, $b \sim N$ as well (remember that $b$ is also a RV)
 
@@ -111,9 +111,9 @@ Quirky interpretation: If we're regressing $y$ on $x$, we probably think $x$ aff
 
 Now, we're doing statistics, so we know we're going to make mistakes sometimes (that's just how statistics goes)
 
-A **Type I** error is the probability that we reject the null hypothesis when it's actually true (i.e., $\beta=0$, but we conclude otherwise)
+A **Type I** error is when we reject the null hypothesis when it's actually true (i.e., $\beta=0$, but we conclude otherwise)
 
-A **Type II** error is the probability that we fail to reject the null when it is false (i.e., $\beta \ne 0$, but we conclude otherwise)
+A **Type II** error is when we fail to reject the null when it is false (i.e., $\beta \ne 0$, but we conclude otherwise)
 
 If $H_0$ is "innocent", a Type I error sends an innocent person to jail, while a Type II error let's a guilty person go free
 
@@ -361,7 +361,7 @@ How can we do hypothesis testing in this case?
 
 Previously, if $b$ was much smaller *or* much larger than $\beta_0$, we would reject the null hypothesis
 
-Now, a value of $b$ that is much smaller than $\beta_0$ is *consistent* with our null that $\beta < \beta_0$, we we're only going to reject if $b$ is much *larger* than $\beta_0$ (i.e., if $b-\beta_0$ is large)
+Now, a value of $b$ that is much smaller than $\beta_0$ is *consistent* with our null that $\beta < \beta_0$, we're only going to reject if $b$ is much *larger* than $\beta_0$ (i.e., if $b-\beta_0$ is large)
 
 ---
 
