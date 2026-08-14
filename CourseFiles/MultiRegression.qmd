@@ -414,7 +414,7 @@ When there are only two $x$ variables, there is another way of expressing the va
 
 It can be shown that
 
-$$Var(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)]^2 \sum_i (x_{1i} - \bar{x}_1)^2}$$
+$$Var(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)^2] \sum_i (x_{1i} - \bar{x}_1)^2}$$
 
 ---
 
@@ -428,7 +428,7 @@ $$V(b_1) = \frac{\sigma^2}{\sum_i (x_{1i} - \bar{x}_1)^2}$$
 
 If we add $x_2$ to the regression, we have
 
-$$V(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)]^2 \sum_i (x_{1i} - \bar{x}_1)^2}$$
+$$V(b_1) = \frac{\sigma^2}{[1-Corr(x_1,x_2)^2] \sum_i (x_{1i} - \bar{x}_1)^2}$$
 
 ---
 
@@ -436,7 +436,7 @@ When we add $x_2$ to the regression, two things change:
 
 1. We are taking $x_2$ out of the error term and putting it into the model. Therefore, the $\sigma^2$ *decreases*, which tends to make $V(b_1)$ *smaller*
 
-2. Now we have the term $[1-Corr(x_1,x_2)]^2$ in the denominator. If $x_1$ and $x_2$ are highly corerlated, this term will be small, which tends to make $V(b_1)$ *larger*
+2. Now we have the term $[1-Corr(x_1,x_2)^2]$ in the denominator. If $x_1$ and $x_2$ are highly correlated, this term will be small, which tends to make $V(b_1)$ *larger*
 
 ---
 
@@ -456,11 +456,11 @@ For this reason, multicollinearity has jokingly been called "micronumerosity," r
 
 There is a form of multicollinearity that is a little more problematic
 
-**Perfect multicolliearity** occurs when two variables are *perfectly* correlated
+**Perfect multicollinearity** occurs when two variables are *perfectly* correlated
 
 Assuming a two-variable regression for simplicity,
 
-$$V(b_1)=\frac{\sigma^2}{[1-Corr(x_1, x_2)]^2 \sum_i (x_{1i}-\bar{x}_1)^2},$$
+$$V(b_1)=\frac{\sigma^2}{[1-Corr(x_1, x_2)^2] \sum_i (x_{1i}-\bar{x}_1)^2},$$
 $V(b_1)$ is not even defined in this case
 
 ---

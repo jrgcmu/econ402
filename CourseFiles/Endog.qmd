@@ -28,7 +28,7 @@ Also recall that we said that the real assumption here is that the mean of $\var
 
 In fact, we can restate this assumption as $Cov(\varepsilon_i, x)=0$ (assuming a univariate regression for simplicity)
 
-Now, we'll investigate the consequences of failures of this assumpion
+Now, we'll investigate the consequences of failures of this assumption
 
 For simplicity, we'll do our analysis in the context of a univariate regression, but our conclusions will carry over to the multivariate case
 
@@ -59,7 +59,7 @@ If we exclude $x_2$ from the regression, then we can write the model as
 $$y = \alpha + \beta_1 x_1 + (\beta_2 x_2 + u)
 = \alpha + \beta_1 x_1 + \varepsilon$$
 
-If $x_2$ is correlated with $x_1$, the $\varepsilon$ will be as well
+If $x_2$ is correlated with $x_1$, then $\varepsilon$ will be as well
 
 ---
 
@@ -405,7 +405,7 @@ So consistency is the best we can do, but this is ok --- consistency is a good p
     
 It turns out that IV tends to be more biased when the correlation between $x$ and $z$ is small (this is known as a **weak instrument**)
 
-Intuitively, this is because our prediction $\widehat{x}$ is based on an estimate of the relationshp between $x$ and $z$ and not the *true* relationship, so in small samples, $\widehat{x}$ is not completely uncorrelated with $\varepsilon$
+Intuitively, this is because our prediction $\widehat{x}$ is based on an estimate of the relationship between $x$ and $z$ and not the *true* relationship, so in small samples, $\widehat{x}$ is not completely uncorrelated with $\varepsilon$
 
 A common rule of thumb is that if the F-statistic from the **first-stage regression** of $x$ on the instruments is greater than 10, the bias won't be too bad
     
