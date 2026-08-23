@@ -7,10 +7,10 @@ execute:
     echo: true
 ---
 
-```{r setup, include=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
+<!-- knitr::opts_chunk$set(echo = TRUE) -->
+<!-- ``` -->
 
 
 ## What is econometrics
@@ -36,65 +36,21 @@ But first, a bit more about the class
 
 ---
 
-## Software
+## Class info 
 
-Most of the work we'll do in this class will involve using statistical software to work with actual data
+**Syllabus:** It is your responsibility to read the *entire* syllabus to familiarize yourself with important policies and dates for the class
 
-We will do most of our work in [R](https://www.r-project.org), an open-source program for statistics that works on all operating systems
+**Textbook:** Our main source will be my slides, so there is no required text. However, the "official" text for the course is *Introductory Econometrics: Intuition, Proof and Practice* by Zax. I have also listed some additional references in the syllabus for those who want to learn about topics beyond what we'll cover
 
-You will also want to download [R studio](https://posit.co/download/rstudio-desktop/), a program that makes it easier to write R code
-
-Let me know if you run into any trouble installing these programs
+**Software:** A lot of the work we do in this class will be on computers. We will use two different programs: [gretl](https://gretl.sourceforge.net/) and [R](https://www.r-project.org/). Both programs are free and run on any OS
 
 ---
 
-Many employers want to hire people that know how to use R, so learning some of the basics will make you more competitive on the job market
+Gretl is easier to use, but R has more powerful programming capabilities. You can use whichever you like better, though students interested in doing more advanced research should consider learning a little R. If you decide to use R, you might want to download [R Studio](https://posit.co/downloads), a free program which facilitates R programming
 
-On the other hand, R can also be a little bit of a pain
+I will show you a little bit about how to use both programs in class. If you are interested in learning more, I have listed some additional resources in the syllabus
 
-If you prefer, you can also do (most) of your work in gretl, another free econometrics program that is easier to use
-
-Gretl can be downloaded from [https://gretl.sourceforge.net](https://gretl.sourceforge.net)
-
-(I don't care which one you use, I think they're both cool)
-
----
-
-## Textbooks
-
-I have created a fairly comprehensive set of lecture slides, so there is no required text
-
-If (like me) you are the kind of student that likes to have a text, I have several favorites:
-
-**Econometrics texts:**
-
-* *Introductory Econometrics: Intuition, Proof and Practice* by Zax. This is a great book if you want to do a deep dive on the theory behind the topics we'll discuss in this course. My lectures are inspired by, and loosely based around, this book
-
----
-
-* *Introductory Econometrics* by Wooldridge. This is a great book if you want to go beyond the topics covered in this course, or if you want even more examples on the topics that we will cover
-
-* *Mastering Metrics* by Angrist and Pischke. This is a great book if you want to learn more about some of the applied topics that we will cover at the end of the semester
-
-I didn't put any of these in the bookstore because it's often cheaper to find a used copy online
-
----
-
-**Software texts**
-
-I will show you the basics of statistical computing, but if you want to learn more, here are some nice resources:
-
-* *[Introduction to Econometrics with R](https://www.econometrics-with-r.org)* by Hanck, Arnold, Gerber and Schmelzer discusses how to use R for common econometric methods, and can be read for free online
-
-* *[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)* by Venables, Smith, et al. is a classic (and shortish) introduction to basic R, and can be downloaded for free 
-
-* *[FasteR: Fast Lane to Learning R](https://github.com/matloff/fasteR)* by Matloff is a good tutorial on R
-
----
-
-* *[R for Data Science](https://r4ds.hadley.nz)* by Wickham, Cetinkaya-Rundel, and Grolemund is a good introduction to some modern, and advanced, R programming, and is also free to read online
-
-* *[Using gretl for Principles of Econometrics](https://www.learneconometrics.com/gretl/poe5/using_gretl_for_POE5.pdf)* by Adkins is a nice guide that gives more information on using Gretl, and is a free download
+*Let me know as soon as possible if you have any difficulties installing these programs.*
 
 ---
 
