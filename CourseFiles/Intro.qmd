@@ -156,7 +156,7 @@ summary(educ.mod.1)
 
 According to our model,
 
-$$\widehat{educ} = 183.95 + 29.66 \cdot educ$$
+$$\widehat{wage} = 183.95 + 29.66 \cdot educ$$
 
 The value of $b=29.66$ means that every additional year of education increases the predicted wage by about $.30
 
