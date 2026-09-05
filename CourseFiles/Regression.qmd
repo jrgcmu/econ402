@@ -172,7 +172,7 @@ $$b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar 
 To find the constant term, recall that $e_i = y_i - \widehat{y}_i$, or after rearranging
 
 $$y_i = \widehat{y}_i + e_i$$
-If $x$ and $y$ are in deviations form, $\hat y = xb$, so this is just
+If $x$ and $y$ are in deviations form, $\hat y = bx$, so this is just
 
 $$y_i = b x_i  + e_i$$
 ---
@@ -183,11 +183,11 @@ $$y_i - \bar y = b (x_i - \bar x) + e_i$$
 
 or, rearranging,
 
-$$y_i = \underbrace{(\bar y - b \bar x) + b x_i}_{\hat{y}_i} + e_i$$
+$$y_i = \underbrace{\overbrace{(\bar y - b \bar x)}^{\text{Constant}} + b x_i}_{\widehat{y}_i} + e_i$$
 
 Therefore the constant term in $\hat y$ is $\bar y - b \bar x$, so
 
-$$a_i = \bar y - b \bar x$$
+$$a = \bar y - b \bar x$$
 
 ---
 
