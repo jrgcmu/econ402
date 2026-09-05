@@ -164,30 +164,31 @@ so it's all good
 
 What happens if $y$ and $x$ are not in deviations-from-means form?
 
-We can simply replace them with deviations from means:
+We can simply replace them with deviations from means in the equation for $b$:
 
 $$b = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^n (x_i - \bar x)^2}$$
-
-To find the constant term, recall that $e_i = y_i - \widehat{y}_i$,
-
-In deviations form, this means $e_i = y_i - b x_i$ or, rearranging,
-
-$$y_i = bx_i + e_i$$
-
-(This just says that the true $y$ is equal to the prediction, plus the residual)
-
 ---
 
-Expanding $y$ and $x$ back to their original forms, we have
+To find the constant term, recall that $e_i = y_i - \widehat{y}_i$, or after rearranging
 
-$$y_i - \bar y = b(x_i - \bar x)$$
-Rearranging, this becomes
+$$y_i = \widehat{y}_i + e_i$$
+If $x$ and $y$ are in deviations form, $\hat y = xb$, so this is just
 
-$$y_i = \underbrace{(\bar y - b \bar x)}_{\text{Constant term}} + b x_i$$
+$$y_i = b x_i  + e_i$$
+---
 
-Thus, the constant term, and our estimate of $\alpha$, is
+If $x$ and $y$ are not in deviations form, we can replace them with their deviations to get
 
-$$a = \bar{y} - b \bar {x}$$
+$$y_i - \bar y = b (x_i - \bar x) + e_i$$
+
+or, rearranging,
+
+$$y_i = \underbrace{(\bar y - b \bar x) + b x_i}_{\hat{y}_i} + e_i$$
+
+Therefore the constant term in $\hat y$ is $\bar y - b \bar x$, so
+
+$$a_i = \bar y - b \bar x$$
+
 ---
 
 To summarize, if we express $x$ and $y$ in their original forms, we have
