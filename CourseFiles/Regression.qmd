@@ -451,15 +451,16 @@ $$\sum_i y_i^2 = \sum_i (y_i - \hat{y}_i)^2 + \sum_i \hat{y}_i^2
 Now, if we convert back to non-deviations form, we have
 
 $$\sum_i (y_i - \bar y)^2 = \sum_i b^2 (x_i - \bar x)^2 + \sum_i e_i^2$$
+This says that we can divide the total amount of variation in $y$ into the part that the regression explains and the part that it doesn't
 
-Rearranging, we can divide the total variation in $y$ into the part that is explained by the regression and the unexplained part:
+Rearranging, we can also express everything as a fraction of the total variation in $y$:
 
 $$1 = \frac{b^2 \sum_i (x_i - \bar x)^2}{\sum_i (y_i - \bar y)^2} + 
 \frac{\sum_i e_i^2}{\sum_i (y_i - \bar y)^2}$$
 
 ------------------------------------------------------------------------
 
-The $R^2$ is the *fraction of the total variation in* $y$ explained by the regression (or by $x$): 
+The $R^2$ is the fraction of the total variation in $y$ explained by the regression (or by $x$): 
 $$R^2 = \frac{b^2 \sum_i (x_i - \bar x)^2}{\sum_i (y_i - \bar y)^2}
 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar y)^2}$$
 
