@@ -252,7 +252,7 @@ To illustrate the first property, consider what it would mean if $\bar e \ne 0$:
 ```{r}
 #| echo: false
 x <- rnorm(20)
-y <- 2 + x + rnorm(20, 0, .5)
+y <- 2 + x + rnorm(20, 0, .25)
 z <- seq(-2.5, 2.5, length.out=20)
 w <- 0 + z
 plot(x, y, ylim=c(-3, 4))
