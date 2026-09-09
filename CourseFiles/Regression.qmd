@@ -252,7 +252,7 @@ To illustrate the first property, consider what it would mean if $\bar e \ne 0$:
 ```{r}
 #| echo: false
 x <- rnorm(20)
-y <- 2 + x + rnorm(20, 0, .5)
+y <- 2 + x + rnorm(20, 0, .25)
 z <- seq(-2.5, 2.5, length.out=20)
 w <- 0 + z
 plot(x, y, ylim=c(-3, 4))
@@ -361,7 +361,7 @@ plot(gril$s, model$fitted.values, type="b")
 
 ------------------------------------------------------------------------
 
-The intercept of -125.3 means that for someone with no schooling, the wage sill be -125.3
+The intercept of -125.3 means that for someone with no schooling, the wage sill be -125.3 (recall that in these data, wages are measured in cents)
 
 This sounds ridiculous, since nobody can have a negative wage
 
@@ -383,7 +383,7 @@ $$\widehat{wage}_i = -125.3 + 33.5 * school,$$
 the effect of an increase in schooling on the predicted wage is 
 $$\frac{\Delta \widehat{wage}_i}{\Delta s} = 33.5$$
 
-We interpret this to mean that *for every additional unit of schooling, the wage is predicted to increase by \$33.50*
+We interpret this to mean that *for every additional unit of schooling, the wage is predicted to increase by 33.5 cents*
 
 ## Relationship to covariance and correlation
 
