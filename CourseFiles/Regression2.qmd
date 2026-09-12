@@ -7,10 +7,10 @@ execute:
   echo: true
 ---
 
-<!-- ```{r setup, include=FALSE} -->
-<!-- knitr::knit_hooks$set(purl = knitr::hook_purl) -->
-<!-- knitr::opts_chunk$set(echo = TRUE) -->
-<!-- ``` -->
+```{r setup, include=FALSE}
+knitr::knit_hooks$set(purl = knitr::hook_purl)
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Introduction
 
@@ -145,7 +145,7 @@ Two ways to interpret this:
 
 Let's *prove* that $b$ is unbiased (using our deviations-from-means trick)
 
-First, let's use the fact that $y_i = b x_i + \varepsilon$ (plus a few sum properties) to rewrite $b$:
+First, let's use the fact that $y_i = \beta x_i + \varepsilon$ (plus a few sum properties) to rewrite $b$:
 
 $$
 \begin{aligned}
