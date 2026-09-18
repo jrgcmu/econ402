@@ -301,9 +301,9 @@ $$
 V(d) &= V\left[ \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right) y_i \right] = \sum_i V\left[\left( \frac{x_i}{\sum_i x_i^2} + z_i \right) y_i \right] \\
 &= \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right)^2 V(y_i) 
   = \sigma^2 \sum_i \left( \frac{x_i}{\sum_i x_i^2} + z_i \right)^2 \\
-&= \sigma^2 \left[\sum_i \left( \frac{x_i^2}{(\sum_i x_i^2)^2}   
-  + \right) + \sum_i \frac{x_i z_i}{(\sum_i x_i^2)^2} 
-  +\sum_i \frac{z_i^2}{(\sum_i x_i^2)^2}\right] \\
+&= \sigma^2 \left[\sum_i \frac{x_i^2}{(\sum_i x_i^2)^2}   
+  + 2 \sum_i \frac{x_i z_i}{(\sum_i x_i^2)^2} 
+  + \sum_i \frac{z_i^2}{(\sum_i x_i^2)^2}\right] \\
 &= \sigma^2 \left[ \frac{1}{\sum_i x_i^2} + 0 + \ge 0 \right]
 \end{aligned}
 $$
@@ -324,7 +324,7 @@ In our wage example, we estimated that
 
 $$\widehat{wage}_i = -125.3 + 33.5 * school$$
 
-We interpreted this as a *relationship* between $x$ and $\widehat y$: for every additional year of schooling, the predicted  wage will increase by \$33.5
+We interpreted this as a *relationship* between $x$ and $\widehat y$: for every additional year of schooling, the predicted  wage will increase by 33.5 cents
 
 ------------------------------------------------------------------------
 
